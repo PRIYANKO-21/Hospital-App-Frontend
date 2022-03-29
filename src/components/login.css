@@ -1,0 +1,33 @@
+
+
+
+@media all and (min-width: 480px) {
+    .LoginPage {
+      padding: 60px 0;
+    }
+  
+    .LoginPage form {
+      margin: 0 auto;
+      max-width: 320px;
+      padding-top: 30px;
+    }
+}
+
+.form{
+    width:100%;
+    height:100px;
+}
+.form-label{
+    font-size:1.4em !important;
+    padding-bottom: 10px;
+    
+}
+
+button{
+    display:flex !important;
+    justify-content: center !important;
+    margin:0 auto !important;
+    width:30% !important;
+    padding-top:10px;
+    
+}

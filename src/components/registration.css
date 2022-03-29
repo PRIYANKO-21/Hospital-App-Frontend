@@ -1,0 +1,24 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+.RegistrationPage{
+    width:60%;
+    
+    height:90%;
+
+    
+
+}
+.form-label{
+    font-size:1.2em;
+}
+
+.form-control{
+    height: 40px;
+    font-size:2rem;
+}
+
+input::-webkit-input-placeholder {
+    font-size: 15px;
+    line-height: 3;
+}
+
