@@ -23,32 +23,35 @@ class AdminLoginPage extends Component {
     this.detailsChange = this.detailsChange.bind(this);
   }
 
-  submitAdminLogin(event){
-      console.log(this.state);
-      event.preventDefault();
-      const headers = { 
-          "Content-Type": "application/json" ,
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-      };
 
-      
-      
-      axios.post('http://localhost:4000/admin-login', this.state, { headers })
-      .then(response => 
-        {
-          if(response.data==="Unmatched"){
-            alert("Wrong Details! Enter the valid Details");
-            
-          }
-          else{
-            this.setState({isLoggedIn : true});
-            //setting the cookie here
-            document.cookie = "admin_cookie=" + response.data;
-            console.log("Cookie set");
-          }
+
+  submitAdminLogin(event){
+    //console.log(this.state);
+    event.preventDefault();
+    const headers = { 
+        "Content-Type": "application/json" ,
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+    };
+    
+    
+    axios.post('http://localhost:4000/admin-login', this.state, { headers })
+    .then(response => 
+      {
+        if(response.data==="Unmatched"){
+          alert("Wrong Details! Enter the valid Details");
+          
         }
-      );
+        else{
+          this.setState({isLoggedIn : true});
+          //setting the cookie here
+          document.cookie = "admin_cookie=" + response.data;
+          console.log("Cookie set");
+          
+          //console.log(this.getCookie('admin_cookie'));
+        }
+      }
+    );
   }
 
   detailsChange(event){

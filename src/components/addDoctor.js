@@ -22,6 +22,18 @@ class AddDoctorPage extends Component {
     this.detailsChange = this.detailsChange.bind(this);
   }
 
+
+  getCookie(cName) {
+    const name = cName + "=";
+    const cDecoded = decodeURIComponent(document.cookie); //to be careful
+    const cArr = cDecoded .split('; ');
+    let res;
+    cArr.forEach(val => {
+        if (val.indexOf(name) === 0) res = val.substring(name.length);
+    })
+    return res;
+  }
+
   submitAddDoctor(event){
       console.log(this.state);
       event.preventDefault();
@@ -32,8 +44,14 @@ class AddDoctorPage extends Component {
       };
 
       
-      
-      axios.post('http://localhost:4000/add-doctor', this.state, { headers })
+      const token = this.getCookie('admin_cookie');
+      axios.post('http://localhost:4000/add-doctor', this.state, 
+      { 
+        headers: {
+            'Authorization': `Bearer ${token}` 
+          } 
+        
+      })
       .then(response => 
         {
             console.log("return post method");
