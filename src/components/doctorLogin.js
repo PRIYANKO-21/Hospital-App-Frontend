@@ -4,19 +4,19 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from 'axios';
 import { Redirect } from 'react-router';
-import './login.css';
+import './doctorLogin.css';
 
 
 
 
-class LoginPage extends Component {
+class DoctorLoginPage extends Component {
 
 
   constructor(props){
     super(props);
     this.state = {
-        patient_email : '',
-        patient_password : '',
+        username : '',
+        password : '',
         isLoggedIn: false
     }
     this.submitPatientLogin = this.submitPatientLogin.bind(this);
@@ -34,18 +34,18 @@ class LoginPage extends Component {
 
       
       
-      axios.post('http://localhost:5000/login-patient', this.state, { headers })
+      axios.post('http://localhost:5000/login-doctor', this.state, { headers })
       .then(response => 
         {
-          if(response.data==="Unmatched"){
-            alert("Wrong password! Enter the valid password");
-            
+          if(response.status!=200){
+            alert("Invalid Credentials!Enter correct credentials");
           }
           else{
             this.setState({isLoggedIn : true});
             //setting the cookie here
-            document.cookie = "patient_cookie=" + response.data;
-            console.log("Cookie set");
+            document.cookie = "doctor_cookie=" + response.data;
+            console.log("Doctor Cookie set");
+            alert("Login Successful")
           }
         }
       );
@@ -57,9 +57,6 @@ class LoginPage extends Component {
       });
   }
 
-  headers = {
-      "Content-Type": "application/json"
-  };
 
 
 
@@ -77,8 +74,8 @@ class LoginPage extends Component {
                 required
                 autoFocus
                 type="text"
-                value={this.state.patient_email}
-                name = "patient_email"
+                value={this.state.username}
+                name = "username"
                 onChange={this.detailsChange}
                 placeholder = "Email"
               />
@@ -88,10 +85,10 @@ class LoginPage extends Component {
               <Form.Control
                 required
                 type="password"
-                value={this.state.patient_password}
+                value={this.state.password}
                 onChange={this.detailsChange}
                 placeholder="Password"
-                name="patient_password"
+                name="password"
               />
             </Form.Group>
             <Button size="lg" type="submit">
@@ -111,4 +108,4 @@ class LoginPage extends Component {
 
 }
 
-export default LoginPage;
+export default DoctorLoginPage;

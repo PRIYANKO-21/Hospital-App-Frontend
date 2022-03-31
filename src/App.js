@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import { Switch, Route } from "react-router-dom";
-import LoginPage from './components/login.js';
+import DoctorLoginPage from './components/doctorLogin.js';
 import DoctorRegistrationPage from './components/doctorRegistration';
 import { Redirect } from 'react-router';
 import AdminLoginPage from './components/adminLogin';
@@ -38,12 +38,12 @@ const Home = () => {
   );
 };
 
-const Login = () => {
+const LoginDoctor = () => {
   return (
     <>
       <Navbar />
       <section className="hero-section">
-        <LoginPage/>
+        <DoctorLoginPage/>
       </section>
     </>
   );
@@ -86,7 +86,7 @@ const DoctorRegister= () => {
 const Logout= () => {
   document.cookie = "patient_cookie" + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
   
-  return <Redirect to = {{ pathname: "/login" }} />;
+  return <Redirect to = {{ pathname: "/login-doctor" }} />;
   
 };
 
@@ -105,8 +105,8 @@ const App = () => {
         <Home />
       </Route>
 
-      <Route path="/login">
-        <Login />
+      <Route path="/login-doctor">
+        <LoginDoctor />
       </Route>
 
       <Route path="/login-admin">

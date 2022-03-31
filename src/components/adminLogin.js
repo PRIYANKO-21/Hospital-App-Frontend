@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from 'axios';
 import { Redirect } from 'react-router';
-import './login.css';
+import './doctorLogin.css';
 
 
 
@@ -38,7 +38,7 @@ class AdminLoginPage extends Component {
     axios.post('http://localhost:4000/admin-login', this.state, { headers })
     .then(response => 
       {
-        if(response.data==="Unmatched"){
+        if(response.status!=200){
           alert("Wrong Details! Enter the valid Details");
           
         }
@@ -47,7 +47,7 @@ class AdminLoginPage extends Component {
           //setting the cookie here
           document.cookie = "admin_cookie=" + response.data;
           console.log("Cookie set");
-          
+          alert("Admin Login Successful!");
           //console.log(this.getCookie('admin_cookie'));
         }
       }

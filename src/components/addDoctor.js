@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from 'axios';
 import { Redirect } from 'react-router';
-import './login.css';
+import './doctorLogin.css';
 
 
 
@@ -40,25 +40,21 @@ class AddDoctorPage extends Component {
       const headers = { 
           "Content-Type": "application/json" ,
           "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+          'Authorization': `Bearer ${token}` 
       };
 
       
       const token = this.getCookie('admin_cookie');
-      axios.post('http://localhost:4000/add-doctor', this.state, 
-      { 
-        headers: {
-            'Authorization': `Bearer ${token}` 
-          } 
-        
-      })
+      axios.post('http://localhost:4000/add-doctor', this.state, {headers})
       .then(response => 
         {
-            console.log("return post method");
-            //console.log(response);
-            console.log("Doctor added");
-            console.log(response);
-            // xPaths = response.data.xPaths;
+          if(response.status==200){
+            alert("Doctor Added!");
+          }
+          else{
+            alert("Doctor not added.Please Try Again");
+          }
           }
       );
   }

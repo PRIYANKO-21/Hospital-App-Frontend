@@ -51,7 +51,7 @@ const Navbar = () => {
                 <NavLink to="/">Home</NavLink>
               </li>
               <li>
-                <NavLink to="/login">Login</NavLink>
+                <NavLink to="/login-doctor">Doctor Login</NavLink>
               </li>
               <li>
                 <NavLink to="/login-admin">Admin Login</NavLink>
@@ -63,7 +63,7 @@ const Navbar = () => {
                 <NavLink to="/register-doctor">Register Doctor</NavLink>
               </li>
               <li>
-                <NavLink to="/logout">Logout</NavLink>
+                <NavLink to="/logout">Doctor Logout</NavLink>
               </li>
               <li>
                 <NavLink to="/logout-admin">Admin Logout</NavLink>
