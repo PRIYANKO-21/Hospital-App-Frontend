@@ -4,12 +4,12 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from 'axios';
 import { Redirect } from 'react-router';
-import './login.css';
+import './doctorLogin.css';
 
 
 
 
-class LoginPage extends Component {
+class DoctorLoginPage extends Component {
 
 
   constructor(props){
@@ -34,18 +34,26 @@ class LoginPage extends Component {
 
       
       
+<<<<<<< HEAD:src/components/login.js
       axios.post('http://localhost:8081/login-doctor', this.state, { headers })
+=======
+      axios.post('http://localhost:5000/login-doctor', this.state, { headers })
+>>>>>>> c4b9a6816395dbc7b27d46b02aebe40a9426fa9c:src/components/doctorLogin.js
       .then(response => 
         {
-          if(response.data==="Unmatched"){
-            alert("Wrong password! Enter the valid password");
-            
+          if(response.status!=200){
+            alert("Invalid Credentials!Enter correct credentials");
           }
           else{
             this.setState({isLoggedIn : true});
             //setting the cookie here
             document.cookie = "doctor_cookie=" + response.data;
+<<<<<<< HEAD:src/components/login.js
             console.log("Cookie set");
+=======
+            console.log("Doctor Cookie set");
+            alert("Login Successful")
+>>>>>>> c4b9a6816395dbc7b27d46b02aebe40a9426fa9c:src/components/doctorLogin.js
           }
         }
       );
@@ -57,9 +65,6 @@ class LoginPage extends Component {
       });
   }
 
-  headers = {
-      "Content-Type": "application/json"
-  };
 
 
 
@@ -77,7 +82,11 @@ class LoginPage extends Component {
                 required
                 autoFocus
                 type="text"
+<<<<<<< HEAD:src/components/login.js
                 value={this.state.patient_email}
+=======
+                value={this.state.username}
+>>>>>>> c4b9a6816395dbc7b27d46b02aebe40a9426fa9c:src/components/doctorLogin.js
                 name = "username"
                 onChange={this.detailsChange}
                 placeholder = "Email"
@@ -88,7 +97,7 @@ class LoginPage extends Component {
               <Form.Control
                 required
                 type="password"
-                value={this.state.patient_password}
+                value={this.state.password}
                 onChange={this.detailsChange}
                 placeholder="Password"
                 name="password"
@@ -111,4 +120,4 @@ class LoginPage extends Component {
 
 }
 
-export default LoginPage;
+export default DoctorLoginPage;
