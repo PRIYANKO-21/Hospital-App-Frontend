@@ -32,7 +32,7 @@ class DoctorRegistrationPage extends Component{
     
         
         
-        axios.post('http://localhost:4000/register-doctor', this.state, { headers })
+        axios.post('http://localhost:8081/register-doctor', this.state, { headers })
          .then(response => 
            {
 

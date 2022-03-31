@@ -45,7 +45,7 @@ class AddDoctorPage extends Component {
 
       
       const token = this.getCookie('admin_cookie');
-      axios.post('http://localhost:4000/add-doctor', this.state, 
+      axios.post('http://localhost:8081/add-doctor', this.state, 
       { 
         headers: {
             'Authorization': `Bearer ${token}` 

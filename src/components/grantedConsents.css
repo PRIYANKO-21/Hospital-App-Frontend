@@ -1,0 +1,15 @@
+button{
+    width:80px !important;
+}
+
+.ReactTable{
+    margin:0 auto;
+    justify-content:center;
+    align-items:center;
+    margin-top: 200px !important;
+    font-size:1.3em;
+    width:90vw !important;
+}
+.rt-td{
+    width:160px !important;
+}

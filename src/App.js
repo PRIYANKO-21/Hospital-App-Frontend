@@ -6,7 +6,9 @@ import DoctorRegistrationPage from './components/doctorRegistration';
 import { Redirect } from 'react-router';
 import AdminLoginPage from './components/adminLogin';
 import AddDoctorPage from './components/addDoctor';
-
+import GrantedConsentPage from './components/grantedConsents';
+import RequestConsentPage from './components/requestConsent';
+import ViewEHR from './components/viewEHR';
 let isLoggedIn = false;
 
 function getCookie(name) {
@@ -83,6 +85,30 @@ const DoctorRegister= () => {
   );
 };
 
+
+const GrantedConsent= () => {
+  return (
+    <>
+      <Navbar />
+      <section className="hero-section">
+        <GrantedConsentPage/>
+      </section>
+    </>
+  );
+};
+
+const RequestConsent = () => {
+  return (
+    <>
+      <Navbar />
+      <section className="hero-section">
+        <RequestConsentPage/>
+      </section>
+    </>
+  );
+};
+
+
 const Logout= () => {
   document.cookie = "patient_cookie" + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
   
@@ -128,6 +154,16 @@ const App = () => {
       <Route path="/logout-admin">
         <AdminLogout />
       </Route>
+      <Route path="/granted-consents">
+        <GrantedConsent />
+      </Route>
+      <Route path="/request-consents">
+        <RequestConsent />
+      </Route>
+      <Route path="/view-ehr/:patientId/:consentId">
+        <ViewEHR />
+      </Route>
+
     </Switch>
   );
 };

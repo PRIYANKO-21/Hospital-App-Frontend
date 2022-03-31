@@ -68,6 +68,12 @@ const Navbar = () => {
               <li>
                 <NavLink to="/logout-admin">Admin Logout</NavLink>
               </li>
+              <li>
+                <NavLink to="/granted-consents">Granted Consents</NavLink>
+              </li>
+              <li>
+                <NavLink to="/request-consents">Request Consents</NavLink>
+              </li>
             </ul>
           </div>
   
@@ -75,41 +81,7 @@ const Navbar = () => {
         </nav>
       </>
     );
-  //}
-/*   else{
-    return (
-      <>
-        <nav className="main-nav">
-          
-          <div className="logo">
-            <h2>
-              <span>P</span>atient
-              <span>A</span>pp
-            </h2>
-          </div>
-  
-          
-          <div
-            className={
-              showMediaIcons ? "menu-link mobile-menu-link" : "menu-link"
-            }>
-            <ul>
 
-              <li>
-                <NavLink to="/login">Login</NavLink>
-              </li>
-              <li>
-                <NavLink to="/register">Register</NavLink>
-              </li>
-
-            </ul>
-          </div>
-  
-          
-        </nav>
-      </>
-    );
-  }*/
 
 };
 

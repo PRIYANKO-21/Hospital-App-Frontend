@@ -15,8 +15,8 @@ class LoginPage extends Component {
   constructor(props){
     super(props);
     this.state = {
-        patient_email : '',
-        patient_password : '',
+        username : '',
+        password : '',
         isLoggedIn: false
     }
     this.submitPatientLogin = this.submitPatientLogin.bind(this);
@@ -34,7 +34,7 @@ class LoginPage extends Component {
 
       
       
-      axios.post('http://localhost:5000/login-patient', this.state, { headers })
+      axios.post('http://localhost:8081/login-doctor', this.state, { headers })
       .then(response => 
         {
           if(response.data==="Unmatched"){
@@ -44,7 +44,7 @@ class LoginPage extends Component {
           else{
             this.setState({isLoggedIn : true});
             //setting the cookie here
-            document.cookie = "patient_cookie=" + response.data;
+            document.cookie = "doctor_cookie=" + response.data;
             console.log("Cookie set");
           }
         }
@@ -78,7 +78,7 @@ class LoginPage extends Component {
                 autoFocus
                 type="text"
                 value={this.state.patient_email}
-                name = "patient_email"
+                name = "username"
                 onChange={this.detailsChange}
                 placeholder = "Email"
               />
@@ -91,7 +91,7 @@ class LoginPage extends Component {
                 value={this.state.patient_password}
                 onChange={this.detailsChange}
                 placeholder="Password"
-                name="patient_password"
+                name="password"
               />
             </Form.Group>
             <Button size="lg" type="submit">
