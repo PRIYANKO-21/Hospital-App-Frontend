@@ -43,24 +43,14 @@ getCookie(cName) {
     console.log("Calling")
     
         const token = this.getCookie('doctor_cookie');
-        const headers = { 
-            "Content-Type": "application/json" ,
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-        };
-        axios.get('http://localhost:8081/get-ehr/'+this.props.match.params.patientId+'/'+this.props.match.params.consentId,  
+        console.log("token" + token)
+        axios.get('http://localhost:8082/get-ehr/'+this.props.match.params.patientId+'/'+this.props.match.params.consentId,  
         { 
-            headers: {
+          headers: {
             'Authorization': `Bearer ${token}` 
-          }  
+          }
         })
-        // .then(response => 
-        //   {
-        //     console.log(response);
-        //     this.setState({pid:this.props.match.params.patientId,cid:this.props.match.params.consentId})
-        //     this.setState({records: response.data});
-        //   }
-        // )
+
         .then(response => {
             this.setState({
             record: response.data,
@@ -116,8 +106,8 @@ getCookie(cName) {
                                                   <h3 className="encounter">OpRecords:</h3>
                                                   <li className="op_records">Diagnosis : {diagnosis}</li>
                                                   <li className="op_records">Op Record Id : {op_record_id}</li>
-                                                  <li className="op_records">Complaints : {recordDetails.complaints}</li>
-                                                  <li className="op_records">Prescription : {recordDetails.prescription}</li>                                      
+                                                  <li className="op_records">Details : {recordDetails}</li>
+                                                  <li className="op_records">Timestamp : {timestamp}</li>                                
                                                 </div>
                                               ))
                                       }

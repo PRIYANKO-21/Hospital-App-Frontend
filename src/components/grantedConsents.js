@@ -35,7 +35,7 @@ class GrantedConsentPage extends Component {
     async getUsersData(){
       const token = this.getCookie('doctor_cookie');
       //const res = await axios.get('https://jsonplaceholder.typicode.com/users')
-      const res = await axios.get('http://localhost:8081/get-granted-consents',{
+      const res = await axios.get('http://localhost:8082/get-granted-consents',{
         headers: {
           'Authorization': `Bearer ${token}`
         }

@@ -37,16 +37,14 @@ class AddDoctorPage extends Component {
   submitAddDoctor(event){
       console.log(this.state);
       event.preventDefault();
+      const token = this.getCookie('admin_cookie');
       const headers = { 
-          "Content-Type": "application/json" ,
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
           'Authorization': `Bearer ${token}` 
       };
 
       
-      const token = this.getCookie('admin_cookie');
-      axios.post('http://localhost:8081/add-doctor', this.state, {headers})
+      
+      axios.post('http://localhost:8082/add-doctor', this.state, {headers})
       .then(response => 
         {
           if(response.status==200){

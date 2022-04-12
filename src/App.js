@@ -107,10 +107,19 @@ const RequestConsent = () => {
     </>
   );
 };
-
+const View = () => {
+  return (
+    <>
+      <Navbar />
+      <section className="hero-section">
+        <ViewEHR/>
+      </section>
+    </>
+  );
+};
 
 const Logout= () => {
-  document.cookie = "patient_cookie" + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  document.cookie = "doctor_cookie" + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
   
   return <Redirect to = {{ pathname: "/login-doctor" }} />;
   
@@ -161,7 +170,7 @@ const App = () => {
         <RequestConsent />
       </Route>
       <Route path="/view-ehr/:patientId/:consentId">
-        <ViewEHR />
+        <View />
       </Route>
 
     </Switch>

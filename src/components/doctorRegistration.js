@@ -21,22 +21,25 @@ class DoctorRegistrationPage extends Component{
         this.detailsChange = this.detailsChange.bind(this);
     }
 
+    
+
     submitDoctorRegistration(event){
         console.log(this.state);
         event.preventDefault();
-        const headers = { 
-            "Content-Type": "application/json" ,
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-        };
+       // const token = this.getCookie('doctor_cookie');
+       const headers = { 
+        "Content-Type": "application/json" ,
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+    };
     
         
         
-        axios.post('http://localhost:8081/register-doctor', this.state, { headers })
+        axios.post('http://localhost:8082/register-doctor', this.state, { headers })
          .then(response => 
            {
 
-            if(response.data===200){
+            if(response.status===200){
                 this.setState({isRegistrationSuccessFul : true});
                 alert("Registration Successful!! Kindly Login Now");
             }

@@ -19,19 +19,28 @@ class RequestConsentPage extends Component{
         this.detailsChange = this.detailsChange.bind(this);
     }
 
+    getCookie(cName) {
+        const name = cName + "=";
+        const cDecoded = decodeURIComponent(document.cookie); //to be careful
+        const cArr = cDecoded .split('; ');
+        let res;
+        cArr.forEach(val => {
+            if (val.indexOf(name) === 0) res = val.substring(name.length);
+        })
+        return res;
+      }
+
     submitRequestConsent(event){
       console.log(this.state);
       event.preventDefault();
-      const headers = { 
-          "Content-Type": "application/json" ,
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-          "Authorization" : "doc_123"
+      const token=this.getCookie('doctor_cookie')
+      const headers = {
+          "Authorization" : `Bearer ${token}`
       };
   
       
       
-      axios.post('http://localhost:8081/request-consent', this.state, { headers })
+      axios.post('http://localhost:8082/request-consent', this.state, { headers })
        .then(response => 
          {
            console.log("return post method");

@@ -34,11 +34,7 @@ class DoctorLoginPage extends Component {
 
       
       
-<<<<<<< HEAD:src/components/login.js
-      axios.post('http://localhost:8081/login-doctor', this.state, { headers })
-=======
-      axios.post('http://localhost:5000/login-doctor', this.state, { headers })
->>>>>>> c4b9a6816395dbc7b27d46b02aebe40a9426fa9c:src/components/doctorLogin.js
+      axios.post('http://localhost:8082/login-doctor', this.state, { headers })
       .then(response => 
         {
           if(response.status!=200){
@@ -48,12 +44,8 @@ class DoctorLoginPage extends Component {
             this.setState({isLoggedIn : true});
             //setting the cookie here
             document.cookie = "doctor_cookie=" + response.data;
-<<<<<<< HEAD:src/components/login.js
-            console.log("Cookie set");
-=======
             console.log("Doctor Cookie set");
             alert("Login Successful")
->>>>>>> c4b9a6816395dbc7b27d46b02aebe40a9426fa9c:src/components/doctorLogin.js
           }
         }
       );
@@ -82,11 +74,7 @@ class DoctorLoginPage extends Component {
                 required
                 autoFocus
                 type="text"
-<<<<<<< HEAD:src/components/login.js
-                value={this.state.patient_email}
-=======
                 value={this.state.username}
->>>>>>> c4b9a6816395dbc7b27d46b02aebe40a9426fa9c:src/components/doctorLogin.js
                 name = "username"
                 onChange={this.detailsChange}
                 placeholder = "Email"
