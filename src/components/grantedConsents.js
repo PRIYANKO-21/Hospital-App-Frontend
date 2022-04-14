@@ -109,7 +109,7 @@ class GrantedConsentPage extends Component {
     ]
     if(!this.state.getEhrResp){
       return (
-        <div>
+        <div style={{marginTop:"200px"}}>
           <ReactTable  
           data={this.state.users}  
           columns={columns}  

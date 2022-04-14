@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect,useRef } from "react";
 import "./navbar.css";
 
 
@@ -6,34 +6,252 @@ import { NavLink } from "react-router-dom";
 
 
 
-let isLoggedIn = false;
 
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
-}
-
-let cookie = getCookie("patient_cookie"); 
-if(cookie!=null){
-  isLoggedIn = true;
-  //alert("cookie there");
-}
-else{
-  isLoggedIn = false;
-}
 
 
 
 
 const Navbar = () => {
+
+
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+
+  let cookie;
+
+  const [adminLoginStatus,setAdminLoginStatus] = useState(false);
+  const [doctorLoginStatus,setDoctorLoginStatus] = useState(false);
+  const [nurseLoginStatus,setNurseLoginStatus] = useState(false);
+
+
+
+  const [isLoggedIn,setLoggedInStatus] = useState(false);
+
   const [showMediaIcons, setShowMediaIcons] = useState(false);
 
-  //if(isLoggedIn){
+
+  //useEffect is called during loading component,on changes to component and on leaving(unmounting) a component
+
+  const isInitialMount = useRef(true);
+  //Restricting useEffect to run only on updates except initial mount
+  useEffect(() => {
+    if (isInitialMount.current) {
+      //findCookie();
+
+      cookie = getCookie("admin_cookie");
+      if(cookie==null){
+        setAdminLoginStatus(false);
+        cookie = getCookie("doctor_cookie");
+        if(cookie==null){
+          setDoctorLoginStatus(false);
+          cookie = getCookie("nurse_cookie");
+          if(cookie==null){
+            setNurseLoginStatus(false);
+          }
+          else{
+            setNurseLoginStatus(true);
+          }
+        }
+        else{
+          setDoctorLoginStatus(true);
+        }
+      } 
+      else{
+        setAdminLoginStatus(true);
+      }
+
+      isInitialMount.current = false;
+    } else {
+      // Your useEffect code here to be run on update
+      //findCookie();
+      cookie = getCookie("admin_cookie");
+      if(cookie==null){
+        setAdminLoginStatus(false);
+        cookie = getCookie("doctor_cookie");
+        if(cookie==null){
+          setDoctorLoginStatus(false);
+          cookie = getCookie("nurse_cookie");
+          if(cookie==null){
+            setNurseLoginStatus(false);
+          }
+          else{
+            setNurseLoginStatus(true);
+          }
+        }
+        else{
+          setDoctorLoginStatus(true);
+        }
+      } 
+      else{
+        setAdminLoginStatus(true);
+      }
+    }
+    if(!adminLoginStatus && !nurseLoginStatus && !doctorLoginStatus){
+      setLoggedInStatus(false);
+    }
+    else{
+      setLoggedInStatus(true);
+    }
+  });
+
+
+
+
+
+  
+
+
+  return !isLoggedIn ? (
+    <>
+      <nav className="main-nav">
+
+        <div className="logo">
+          <h2>
+            <span>H</span>ospital
+            <span>A</span>pp
+          </h2>
+        </div>
+
+
+        <div
+          className={
+            showMediaIcons ? "menu-link mobile-menu-link" : "menu-link"
+          }>
+          <ul>
+            <li>
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/login-doctor">Doctor Login</NavLink>
+            </li>
+            <li>
+              <NavLink to="/login-admin">Admin Login</NavLink>
+            </li>
+            <li>
+              <NavLink to="/register-doctor">Register Doctor</NavLink>
+            </li>
+            <li>
+              <NavLink to="/create-doctor-login">Create Doctor Login</NavLink>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </>
+  ) : adminLoginStatus ? (
+    <>
+      <nav className="main-nav">
+
+        <div className="logo">
+          <h2>
+            <span>H</span>ospital
+            <span>A</span>pp
+          </h2>
+        </div>
+
+
+        <div
+          className={
+            showMediaIcons ? "menu-link mobile-menu-link" : "menu-link"
+          }>
+          <ul>
+            <li>
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/add-doctor">Add Doctor</NavLink>
+            </li>
+
+            <li>
+              <NavLink to="/logout-admin">Logout</NavLink>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </>
+  ) : doctorLoginStatus ? (
+    <>
+      <nav className="main-nav">
+
+        <div className="logo">
+          <h2>
+            <span>H</span>ospital
+            <span>A</span>pp
+          </h2>
+        </div>
+
+
+        <div
+          className={
+            showMediaIcons ? "menu-link mobile-menu-link" : "menu-link"
+          }>
+          <ul>
+            <li>
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/granted-consents">Granted Consents</NavLink>
+            </li>
+            <li>
+              <NavLink to="/request-consents">Request Consents</NavLink>
+            </li>
+            <li>
+              <NavLink to="/add-record">Add Record</NavLink>
+            </li>
+            <li>
+              <NavLink to="/logout-doctor">Logout</NavLink>
+            </li>            
+          </ul>
+        </div>
+      </nav>
+    </>
+  ) : nurseLoginStatus ? (
+    <>
+      <nav className="main-nav">
+
+        <div className="logo">
+          <h2>
+            <span>H</span>ospital
+            <span>A</span>pp
+          </h2>
+        </div>
+
+
+        <div
+          className={
+            showMediaIcons ? "menu-link mobile-menu-link" : "menu-link"
+          }>
+          <ul>
+            <li>
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/login-doctor">Doctor Login</NavLink>
+            </li>
+            <li>
+              <NavLink to="/login-admin">Admin Login</NavLink>
+            </li>
+
+          </ul>
+        </div>
+      </nav>
+    </>
+  ): (
+    <>
+      <h1>"Hello"</h1>
+    </>
+  );
+  
+  
+
+
+/*
     return (
       <>
         <nav className="main-nav">
-          {/* 1st logo part  */}
+          
           <div className="logo">
             <h2>
               <span>H</span>ospital
@@ -41,7 +259,7 @@ const Navbar = () => {
             </h2>
           </div>
   
-          {/* 2nd menu part  */}
+          
           <div
             className={
               showMediaIcons ? "menu-link mobile-menu-link" : "menu-link"
@@ -56,15 +274,7 @@ const Navbar = () => {
               <li>
                 <NavLink to="/login-admin">Admin Login</NavLink>
               </li>
-              <li>
-                <NavLink to="/add-doctor">Add Doctor</NavLink>
-              </li>
-              <li>
-                <NavLink to="/register-doctor">Register Doctor</NavLink>
-              </li>
-              <li>
-                <NavLink to="/logout">Doctor Logout</NavLink>
-              </li>
+
               <li>
                 <NavLink to="/logout-admin">Admin Logout</NavLink>
               </li>
@@ -81,7 +291,7 @@ const Navbar = () => {
         </nav>
       </>
     );
-
+*/
 
 };
 
