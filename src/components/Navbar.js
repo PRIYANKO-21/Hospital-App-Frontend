@@ -131,6 +131,9 @@ const Navbar = () => {
               <NavLink to="/login-admin">Admin Login</NavLink>
             </li>
             <li>
+              <NavLink to="/create-login">Create Doctor Login</NavLink>
+            </li>
+            <li>
               <NavLink to="/register-doctor">Register Doctor</NavLink>
             </li>
 
@@ -198,9 +201,7 @@ const Navbar = () => {
             <li>
               <NavLink to="/add-record">Add Record</NavLink>
             </li>
-            <li>
-              <NavLink to="/create-doctor-login">Create Doctor Login</NavLink>
-            </li>
+
             <li>
               <NavLink to="/logout-doctor">Logout</NavLink>
             </li>            

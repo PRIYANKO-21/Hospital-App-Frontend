@@ -84,21 +84,14 @@ const AddDoctor = (props) => {
 
 
 const CreateDoctorLogin = (props) => {
-  return props.doctorLoginStatus ? (
+  return(
     <>
       <Navbar />
       <section className="hero-section">
         <CreateDoctorLoginPage/>
       </section>
     </>
-  ):(
-    <>
-      <Navbar />
-      <section className="hero-section">
-        <h1>Unauthorized</h1>
-      </section>
-    </>
-  );
+  )
 };
 
 
@@ -169,21 +162,14 @@ const View = (props) => {
 };
 
 const VerifyOtp = (props) => {
-  return props.doctorLoginStatus ? (
+  return (
     <>
       <Navbar />
       <section className="hero-section">
         <VerifyOtpPage/>
       </section>
     </>
-  ):(
-    <>
-      <Navbar />
-      <section className="hero-section">
-        <h1>Unauthorized</h1>
-      </section>
-    </>
-  );
+  )
 };
 
 const DoctorLogout= () => {
@@ -333,11 +319,11 @@ const App = () => {
       <Route path="/view-ehr/:patientId/:consentId">
         <View doctorLoginStatus={doctorLoginStatus}/>
       </Route>
-      <Route path="/create-doctor-login">
-        <CreateDoctorLogin doctorLoginStatus={doctorLoginStatus}/>
+      <Route path="/create-login">
+        <CreateDoctorLogin />
       </Route>
       <Route path="/verify-otp/:doctorId">
-        <VerifyOtp doctorLoginStatus={doctorLoginStatus}/>
+        <VerifyOtp />
       </Route>
 
     </Switch>

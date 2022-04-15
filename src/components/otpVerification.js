@@ -25,7 +25,11 @@ class VerifyOtpPage extends Component {
     this.detailsChange = this.detailsChange.bind(this);
   }
 
-
+  static propTypes = {
+    match: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
+  };
   getCookie(cName) {
     const name = cName + "=";
     const cDecoded = decodeURIComponent(document.cookie); //to be careful
@@ -39,10 +43,13 @@ class VerifyOtpPage extends Component {
 
   submitAddDoctor(event){
       console.log(this.state);
+      console.log(this.props);
       event.preventDefault();
-      const token = this.getCookie('doctor_cookie');
+      //const token = this.getCookie('doctor_cookie');
       const headers = { 
-          'Authorization': `Bearer ${token}` 
+        "Content-Type": "application/json" ,
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
       };
 
       
@@ -50,7 +57,7 @@ class VerifyOtpPage extends Component {
       axios.post('http://localhost:8082/validate-otp/'+this.props.match.params.doctorId+'/'+this.state.otp, this.state, {headers})
       .then(response => 
         {
-          if(response.status==200){
+          if(response.status===200){
             alert("Otp Validation Successful!");
           }
           else{
@@ -74,7 +81,7 @@ class VerifyOtpPage extends Component {
 
 
   render(){
-
+    const {match,location,history} = this.props;
   
       return (
         <div className="VerifyOtp">
@@ -106,4 +113,6 @@ class VerifyOtpPage extends Component {
 
 }
 
-export default VerifyOtpPage;
+//export default VerifyOtpPage;
+const CreateConsentWithRouter = withRouter(VerifyOtpPage);
+export default CreateConsentWithRouter;
