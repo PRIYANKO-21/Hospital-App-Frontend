@@ -10,6 +10,7 @@ import GrantedConsentPage from './components/grantedConsents';
 import RequestConsentPage from './components/requestConsent';
 import ViewEHR from './components/viewEHR';
 import CreateDoctorLoginPage from './components/createDoctorLogin';
+import VerifyOtpPage from './components/otpVerification';
 let isLoggedIn = false;
 
 function getCookie(name) {
@@ -155,6 +156,24 @@ const View = (props) => {
       <Navbar />
       <section className="hero-section">
         <ViewEHR/>
+      </section>
+    </>
+  ):(
+    <>
+      <Navbar />
+      <section className="hero-section">
+        <h1>Unauthorized</h1>
+      </section>
+    </>
+  );
+};
+
+const VerifyOtp = (props) => {
+  return props.doctorLoginStatus ? (
+    <>
+      <Navbar />
+      <section className="hero-section">
+        <VerifyOtpPage/>
       </section>
     </>
   ):(
@@ -317,6 +336,10 @@ const App = () => {
       <Route path="/create-doctor-login">
         <CreateDoctorLogin doctorLoginStatus={doctorLoginStatus}/>
       </Route>
+      <Route path="/verify-otp/:doctorId">
+        <VerifyOtp doctorLoginStatus={doctorLoginStatus}/>
+      </Route>
+
     </Switch>
   );
 };

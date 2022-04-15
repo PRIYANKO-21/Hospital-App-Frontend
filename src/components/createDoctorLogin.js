@@ -2,9 +2,9 @@
 import React,{Component} from 'react'
 import {Form ,Button} from 'react-bootstrap'
 import axios from 'axios';
-//import { Redirect } from 'react-router';
+import { Redirect } from 'react-router';
 
-import './requestConsent.css'
+
 
 class CreateDoctorLoginPage extends Component{
 
@@ -40,15 +40,16 @@ class CreateDoctorLoginPage extends Component{
   
       
       
-      axios.post('http://localhost:8082/create-doctor-login', this.state, { headers })
+/*       axios.post('http://localhost:8082/create-doctor-login', this.state, { headers })
        .then(response => 
          {
            console.log("return post method");
            //console.log(response);
             console.log(response);
+            <Redirect to = {{ pathname: "/verify-otp/"+this.state.doctor_id+"/" }} />
            // xPaths = response.data.xPaths;
          }
-      );
+      ); */
   }
 
   detailsChange(event){
