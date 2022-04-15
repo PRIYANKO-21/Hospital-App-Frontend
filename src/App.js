@@ -9,6 +9,7 @@ import AddDoctorPage from './components/addDoctor';
 import GrantedConsentPage from './components/grantedConsents';
 import RequestConsentPage from './components/requestConsent';
 import ViewEHR from './components/viewEHR';
+import CreateDoctorLoginPage from './components/createDoctorLogin';
 let isLoggedIn = false;
 
 function getCookie(name) {
@@ -81,12 +82,19 @@ const AddDoctor = (props) => {
 };
 
 
-const CreateDoctorLogin = () => {
-  return (
+const CreateDoctorLogin = (props) => {
+  return props.doctorLoginStatus ? (
     <>
       <Navbar />
       <section className="hero-section">
-        <AddDoctorPage/>
+        <CreateDoctorLoginPage/>
+      </section>
+    </>
+  ):(
+    <>
+      <Navbar />
+      <section className="hero-section">
+        <h1>Unauthorized</h1>
       </section>
     </>
   );
@@ -307,7 +315,7 @@ const App = () => {
         <View doctorLoginStatus={doctorLoginStatus}/>
       </Route>
       <Route path="/create-doctor-login">
-        <CreateDoctorLogin />
+        <CreateDoctorLogin doctorLoginStatus={doctorLoginStatus}/>
       </Route>
     </Switch>
   );
