@@ -10,6 +10,7 @@ import GrantedConsentPage from './components/grantedConsents';
 import RequestConsentPage from './components/requestConsent';
 import ViewEHR from './components/viewEHR';
 import CreateDoctorLoginPage from './components/createDoctorLogin';
+import DelegateConsentPage from "./components/delegateConsent";
 import VerifyOtpPage from './components/otpVerification';
 let isLoggedIn = false;
 
@@ -149,6 +150,24 @@ const View = (props) => {
       <Navbar />
       <section className="hero-section">
         <ViewEHR/>
+      </section>
+    </>
+  ):(
+    <>
+      <Navbar />
+      <section className="hero-section">
+        <h1>Unauthorized</h1>
+      </section>
+    </>
+  );
+};
+
+const DelegateConsent = (props) => {
+  return props.doctorLoginStatus ? (
+    <>
+      <Navbar />
+      <section className="hero-section">
+        <DelegateConsentPage/>
       </section>
     </>
   ):(
@@ -325,7 +344,9 @@ const App = () => {
       <Route path="/verify-otp/:doctorId">
         <VerifyOtp />
       </Route>
-
+      <Route path="/delegate-consent-doc/:consentId">
+        <DelegateConsent doctorLoginStatus={doctorLoginStatus}/>
+      </Route>
     </Switch>
   );
 };

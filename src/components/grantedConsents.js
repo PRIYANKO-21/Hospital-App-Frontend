@@ -17,7 +17,8 @@ class GrantedConsentPage extends Component {
         loading:true,
         getEhrResp : false,
         pid : '',
-        cid : ''
+        cid : '',
+        Vehr : false
       }
     }
 
@@ -97,6 +98,7 @@ class GrantedConsentPage extends Component {
             //window.location.href='http://localhost:8081/get-ehr/'+original.patient_id+'/'+original.consent_id;
             this.setState({pid:original.patient_id,cid:original.consent_id})
             this.getData(original.patient_id,original.consent_id)  ;
+            this.setState({Vehr:true});
           }}
         >
           View Record
@@ -104,7 +106,29 @@ class GrantedConsentPage extends Component {
           // <td>
           // <NavLink to={"/view-ehr/"+original.patient_id+'/'+original.consent_id}> View Record </NavLink>
           // </td>
+        },
+
+        {
+          Header: 'View',  
+        accessor: 'email',
+       Cell: ({ original }) => (
+        <button
+          type="button"
+          onClick={(e) => {
+          console.log(original);
+            e.preventDefault();
+            //window.location.href='http://localhost:8081/get-ehr/'+original.patient_id+'/'+original.consent_id;
+            this.setState({cid:original.consent_id})
+            this.getData(original.consent_id)  ;
+          }}
+        >
+          Delegate Consent
+        </button>)
+          // <td>
+          // <NavLink to={"/view-ehr/"+original.patient_id+'/'+original.consent_id}> View Record </NavLink>
+          // </td>
         }
+        
         
     ]
     if(!this.state.getEhrResp){
@@ -119,7 +143,10 @@ class GrantedConsentPage extends Component {
       )      
     }
     else{
+      if(this.state.Vehr == true)
       return <Redirect to = {{ pathname: "/view-ehr/" + this.state.pid+'/'+this.state.cid }} />;
+      else if(this.state.Vehr == false)
+      return <Redirect to = {{ pathname: "/delegate-consent-doc/" + this.state.cid }} />;
     }
 
     }
