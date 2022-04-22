@@ -10,6 +10,7 @@ import GrantedConsentPage from './components/grantedConsents';
 import RequestConsentPage from './components/requestConsent';
 import ViewEHR from './components/viewEHR';
 import CreateDoctorLoginPage from './components/createDoctorLogin';
+import DelegateConsentPage from "./components/delegateConsent";
 import VerifyOtpPage from './components/otpVerification';
 let isLoggedIn = false;
 
@@ -84,21 +85,14 @@ const AddDoctor = (props) => {
 
 
 const CreateDoctorLogin = (props) => {
-  return props.doctorLoginStatus ? (
+  return(
     <>
       <Navbar />
       <section className="hero-section">
         <CreateDoctorLoginPage/>
       </section>
     </>
-  ):(
-    <>
-      <Navbar />
-      <section className="hero-section">
-        <h1>Unauthorized</h1>
-      </section>
-    </>
-  );
+  )
 };
 
 
@@ -168,12 +162,12 @@ const View = (props) => {
   );
 };
 
-const VerifyOtp = (props) => {
+const DelegateConsent = (props) => {
   return props.doctorLoginStatus ? (
     <>
       <Navbar />
       <section className="hero-section">
-        <VerifyOtpPage/>
+        <DelegateConsentPage/>
       </section>
     </>
   ):(
@@ -184,6 +178,17 @@ const VerifyOtp = (props) => {
       </section>
     </>
   );
+};
+
+const VerifyOtp = (props) => {
+  return (
+    <>
+      <Navbar />
+      <section className="hero-section">
+        <VerifyOtpPage/>
+      </section>
+    </>
+  )
 };
 
 const DoctorLogout= () => {
@@ -334,13 +339,15 @@ const App = () => {
       <Route path="/view-ehr/:patientId/:consentId">
         <View doctorLoginStatus={doctorLoginStatus}/>
       </Route>
-      <Route path="/create-doctor-login">
-        <CreateDoctorLogin doctorLoginStatus={doctorLoginStatus}/>
+      <Route path="/create-login">
+        <CreateDoctorLogin />
       </Route>
       <Route path="/verify-otp/:doctorId">
-        <VerifyOtp doctorLoginStatus={doctorLoginStatus}/>
+        <VerifyOtp />
       </Route>
-
+      <Route path="/delegate-consent-doc/:consentId">
+        <DelegateConsent doctorLoginStatus={doctorLoginStatus}/>
+      </Route>
     </Switch>
   );
 };

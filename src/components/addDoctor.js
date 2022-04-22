@@ -47,6 +47,7 @@ class AddDoctorPage extends Component {
       axios.post('http://localhost:8082/add-doctor', this.state, {headers})
       .then(response => 
         {
+          console.log(response);
           if(response.status==200){
             console.log(response);
             alert("Doctor Added with Id = !"+ response.data);
