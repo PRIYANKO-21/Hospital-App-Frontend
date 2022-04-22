@@ -48,7 +48,8 @@ class AddDoctorPage extends Component {
       .then(response => 
         {
           if(response.status==200){
-            alert("Doctor Added!");
+            console.log(response);
+            alert("Doctor Added with Id = !"+ response.data);
           }
           else{
             alert("Doctor not added.Please Try Again");

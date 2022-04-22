@@ -228,6 +228,7 @@ const App = () => {
   const isInitialMount = useRef(true);
   //Restricting useEffect to run only on updates except initial mount
   useEffect(() => {
+    
     if (isInitialMount.current) {
       //findCookie();
 
