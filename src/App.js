@@ -145,7 +145,7 @@ const DelegateConsent = () => {
   );
 };
 
-const VerifyOtp = (props) => {
+const VerifyOtp = () => {
   return (
     <>
       <Navbar />

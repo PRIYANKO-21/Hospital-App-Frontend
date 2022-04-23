@@ -34,7 +34,7 @@ class GrantedConsentPage extends Component {
       return res;
     }
 
-    async getUsersData(){
+    async componentDidMount(){
       const token = this.getCookie('doctor_cookie');
       //const res = await axios.get('https://jsonplaceholder.typicode.com/users')
       const res = await axios.get('http://localhost:8082/get-granted-consents',{

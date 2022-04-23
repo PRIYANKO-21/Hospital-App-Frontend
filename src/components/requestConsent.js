@@ -80,11 +80,12 @@ class RequestConsentPage extends Component{
                             <Form.Label>Select Access Purpose</Form.Label>
                             <Form.Control
               as="select"
-              
+              name="access_purpose"
               onChange={e => {
                 console.log("e.target.value", e.target.value);
                 //setType(e.target.value);
               }}
+             
             >
               <option value="Surgery">Surgery</option>
               <option value="General Health">General Health</option>

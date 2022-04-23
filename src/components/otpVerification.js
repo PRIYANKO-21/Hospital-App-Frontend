@@ -20,11 +20,8 @@ class VerifyOtpPage extends Component {
     this.state = {
         otp : '',
         isLoggedInStatus: false,
-        isOtpVerified : false,
-        isInitialMount : true,
-        adminLoginStatus : false,
-        doctorLoginStatus : false,
-        nurseLoginStatus : false,
+        isOtpVerified : false
+
     }
     this.submitAddDoctor = this.submitAddDoctor.bind(this);
     this.detailsChange = this.detailsChange.bind(this);
@@ -82,67 +79,7 @@ class VerifyOtpPage extends Component {
 
   
   //Restricting useEffect to run only on updates except initial mount
-  componentDidMount() {
-    
-    if (this.state.isInitialMount) {
-      //findCookie();
-
-      const cookie = this.getCookie("admin_cookie");
-      if(cookie==null){
-        this.state.adminLoginStatus = true;
-        cookie = this.getCookie("doctor_cookie");
-        if(cookie==null){
-          this.state.doctorLoginStatus = true;
-          cookie = this.getCookie("nurse_cookie");
-          if(cookie==null){
-            this.state.nurseLoginStatus = true
-          }
-          else{
-            this.state.nurseLoginStatus = true;
-          }
-        }
-        else{
-          this.state.doctorLoginStatus = true;
-        }
-      } 
-      else{
-        this.state.adminLoginStatus = true;
-      }
-
-      this.state.isInitialMount = false;
-    } else {
-      // Your useEffect code here to be run on update
-      //findCookie();
-      const cookie = this.getCookie("admin_cookie");
-      if(cookie==null){
-        this.state.adminLoginStatus = true;
-        cookie = this.getCookie("doctor_cookie");
-        if(cookie==null){
-          this.state.doctorLoginStatus = true;
-          cookie = this.getCookie("nurse_cookie");
-          if(cookie==null){
-            this.state.nurseLoginStatus = true
-          }
-          else{
-            this.state.nurseLoginStatus = true;
-          }
-        }
-        else{
-          this.state.doctorLoginStatus = true;
-        }
-      } 
-      else{
-        this.state.adminLoginStatus = true;
-      }
-    }
-    if(!this.state.adminLoginStatus && !this.state.nurseLoginStatus && !this.state.doctorLoginStatus){
-      this.state.isLoggedInStatus = false;
-    }
-    else{
-      this.status.isLoggedInStatus = true
-    }
-    //console.log(cookie);
-  }
+  
 
 
   render(){
