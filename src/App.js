@@ -11,6 +11,9 @@ import RequestConsentPage from './components/requestConsent';
 import ViewEHR from './components/viewEHR';
 import CreateDoctorLoginPage from './components/createDoctorLogin';
 import VerifyOtpPage from './components/otpVerification';
+import AddRecordsInitialPage from './components/Addrecord_send_otp';
+import VerifyOtptoAddrecordsPage from './components/otp_verification_to_add_records';
+import AddRecordsPage from './components/addrecord';
 let isLoggedIn = false;
 
 function getCookie(name) {
@@ -143,6 +146,63 @@ const RequestConsent = (props) => {
     </>
   );
 };
+
+const AddRecordsInitial = (props) => {
+  return props.doctorLoginStatus ? (
+    <>
+      <Navbar />
+      <section className="hero-section">
+        <AddRecordsInitialPage/>
+      </section>
+    </>
+  ):(
+    <>
+      <Navbar />
+      <section className="hero-section">
+        <h1>Unauthorized</h1>
+      </section>
+    </>
+  );
+};
+
+const VerifyOtpToAddRecords = (props) => {
+  return props.doctorLoginStatus ? (
+    <>
+      <Navbar />
+      <section className="hero-section">
+        <VerifyOtptoAddrecordsPage/>
+      </section>
+    </>
+  ):(
+    <>
+      <Navbar />
+      <section className="hero-section">
+        <h1>Unauthorized</h1>
+      </section>
+    </>
+  );
+};
+
+
+const AddRecords = (props) => {
+  return props.doctorLoginStatus ? (
+    <>
+      <Navbar />
+      <section className="hero-section">
+        <AddRecordsPage/>
+      </section>
+    </>
+  ):(
+    <>
+      <Navbar />
+      <section className="hero-section">
+        <h1>Unauthorized</h1>
+      </section>
+    </>
+  );
+};
+
+
 const View = (props) => {
   return props.doctorLoginStatus ? (
     <>
@@ -324,6 +384,18 @@ const App = () => {
       </Route>
       <Route path="/verify-otp/:doctorId">
         <VerifyOtp />
+      </Route>
+
+      <Route path="/add-record-initial">
+        <AddRecordsInitial doctorLoginStatus={doctorLoginStatus}/>
+      </Route>
+
+      <Route path="/verify-otp-to-add-record/:patientId">
+        <VerifyOtpToAddRecords doctorLoginStatus={doctorLoginStatus}/>
+      </Route>
+
+      <Route path="/add-record/:patientId">
+        <AddRecords doctorLoginStatus={doctorLoginStatus}/>
       </Route>
 
     </Switch>
