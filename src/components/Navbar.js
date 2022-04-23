@@ -200,7 +200,7 @@ const Navbar = () => {
               <NavLink to="/request-consents">Request Consents</NavLink>
             </li>
             <li>
-              <NavLink to="/add-record">Add Record</NavLink>
+              <NavLink to="/add-record-initial">Add Record</NavLink>
             </li>
 
             <li>
