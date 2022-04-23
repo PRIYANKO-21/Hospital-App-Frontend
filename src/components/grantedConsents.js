@@ -18,7 +18,8 @@ class GrantedConsentPage extends Component {
         getEhrResp : false,
         pid : '',
         cid : '',
-        Vehr : false
+        Vehr : false,
+        isDoctorLoggedIn : this.getCookie('doctor_cookie')!==undefined ? true : false
       }
     }
 
@@ -60,9 +61,7 @@ class GrantedConsentPage extends Component {
 
 
 
-    componentDidMount(){
-      this.getUsersData()
-    }
+    
     render() {
       const columns = [{  
         Header: 'Patient ID',  
@@ -131,23 +130,34 @@ class GrantedConsentPage extends Component {
         
         
     ]
-    if(!this.state.getEhrResp){
-      return (
-        <div style={{marginTop:"200px"}}>
-          <ReactTable  
-          data={this.state.users}  
-          columns={columns}  
-          />
-        </div>
-
-      )      
+    if(this.state.isDoctorLoggedIn){
+      if(!this.state.getEhrResp){
+        return (
+          <div style={{marginTop:"200px"}}>
+            <ReactTable  
+            data={this.state.users}  
+            columns={columns}  
+            />
+          </div>
+  
+        )      
+      }
+      else{
+        if(this.state.Vehr == true)
+        return <Redirect to = {{ pathname: "/view-ehr/" + this.state.pid+'/'+this.state.cid }} />;
+        else if(this.state.Vehr == false)
+        return <Redirect to = {{ pathname: "/delegate-consent-doc/" + this.state.cid }} />;
+      }
     }
     else{
-      if(this.state.Vehr == true)
-      return <Redirect to = {{ pathname: "/view-ehr/" + this.state.pid+'/'+this.state.cid }} />;
-      else if(this.state.Vehr == false)
-      return <Redirect to = {{ pathname: "/delegate-consent-doc/" + this.state.cid }} />;
+      return(
+        <div>
+          <h1>UNAUTHORIZED</h1>
+        </div>
+      );
+
     }
+
 
     }
   }

@@ -250,51 +250,6 @@ const Navbar = () => {
   
 
 
-/*
-    return (
-      <>
-        <nav className="main-nav">
-          
-          <div className="logo">
-            <h2>
-              <span>H</span>ospital
-              <span>A</span>pp
-            </h2>
-          </div>
-  
-          
-          <div
-            className={
-              showMediaIcons ? "menu-link mobile-menu-link" : "menu-link"
-            }>
-            <ul>
-              <li>
-                <NavLink to="/">Home</NavLink>
-              </li>
-              <li>
-                <NavLink to="/login-doctor">Doctor Login</NavLink>
-              </li>
-              <li>
-                <NavLink to="/login-admin">Admin Login</NavLink>
-              </li>
-
-              <li>
-                <NavLink to="/logout-admin">Admin Logout</NavLink>
-              </li>
-              <li>
-                <NavLink to="/granted-consents">Granted Consents</NavLink>
-              </li>
-              <li>
-                <NavLink to="/request-consents">Request Consents</NavLink>
-              </li>
-            </ul>
-          </div>
-  
-          
-        </nav>
-      </>
-    );
-*/
 
 };
 

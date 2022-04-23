@@ -19,7 +19,12 @@ class VerifyOtpPage extends Component {
     super(props);
     this.state = {
         otp : '',
-        isLoggedIn: false
+        isLoggedInStatus: false,
+        isOtpVerified : false,
+        isInitialMount : true,
+        adminLoginStatus : false,
+        doctorLoginStatus : false,
+        nurseLoginStatus : false,
     }
     this.submitAddDoctor = this.submitAddDoctor.bind(this);
     this.detailsChange = this.detailsChange.bind(this);
@@ -59,6 +64,7 @@ class VerifyOtpPage extends Component {
         {
           if(response.status===200){
             alert("Otp Validation Successful!");
+            this.setState({isOtpVerified:true});
           }
           else{
             alert("Wrong Otp Entered Try again");
@@ -73,16 +79,75 @@ class VerifyOtpPage extends Component {
       });
   }
 
-  headers = {
-      "Content-Type": "application/json"
-  };
 
+  
+  //Restricting useEffect to run only on updates except initial mount
+  componentDidMount() {
+    
+    if (this.state.isInitialMount) {
+      //findCookie();
 
+      const cookie = this.getCookie("admin_cookie");
+      if(cookie==null){
+        this.state.adminLoginStatus = true;
+        cookie = this.getCookie("doctor_cookie");
+        if(cookie==null){
+          this.state.doctorLoginStatus = true;
+          cookie = this.getCookie("nurse_cookie");
+          if(cookie==null){
+            this.state.nurseLoginStatus = true
+          }
+          else{
+            this.state.nurseLoginStatus = true;
+          }
+        }
+        else{
+          this.state.doctorLoginStatus = true;
+        }
+      } 
+      else{
+        this.state.adminLoginStatus = true;
+      }
+
+      this.state.isInitialMount = false;
+    } else {
+      // Your useEffect code here to be run on update
+      //findCookie();
+      const cookie = this.getCookie("admin_cookie");
+      if(cookie==null){
+        this.state.adminLoginStatus = true;
+        cookie = this.getCookie("doctor_cookie");
+        if(cookie==null){
+          this.state.doctorLoginStatus = true;
+          cookie = this.getCookie("nurse_cookie");
+          if(cookie==null){
+            this.state.nurseLoginStatus = true
+          }
+          else{
+            this.state.nurseLoginStatus = true;
+          }
+        }
+        else{
+          this.state.doctorLoginStatus = true;
+        }
+      } 
+      else{
+        this.state.adminLoginStatus = true;
+      }
+    }
+    if(!this.state.adminLoginStatus && !this.state.nurseLoginStatus && !this.state.doctorLoginStatus){
+      this.state.isLoggedInStatus = false;
+    }
+    else{
+      this.status.isLoggedInStatus = true
+    }
+    //console.log(cookie);
+  }
 
 
   render(){
     const {match,location,history} = this.props;
-  
+    if(!this.state.isOtpVerified){
       return (
         <div className="VerifyOtp">
           <h1>Verify Otp</h1>
@@ -107,7 +172,10 @@ class VerifyOtpPage extends Component {
         </div>
        
       );
-  
+    }
+    else{
+      return <Redirect to = {{ pathname: "/login-doctor" }} />;
+    }
 
   }
 

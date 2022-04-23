@@ -14,7 +14,8 @@ class DelegateConsentPage extends Component{
     constructor(props){
         super(props);
         this.state = {
-          doctor_id : ''
+          doctor_id : '',
+          isDoctorLoggedIn : this.getCookie('doctor_cookie')!==undefined ? true : false
         }
         this.submitDelegateConsent = this.submitDelegateConsent.bind(this);
         this.detailsChange = this.detailsChange.bind(this);
@@ -67,24 +68,32 @@ class DelegateConsentPage extends Component{
 
     render(){
         const {match,location,history} = this.props;
-        return (
+        if(this.state.isDoctorLoggedIn){
+            return (
         
-            <div className="DelegateConsent">
-                <h1>DELEGATE CONSENT</h1>
-                <Form onSubmit = {this.submitDelegateConsent}>
-                    <Form.Group className="mb-3" controlId="formBasicPatientId">
-                        <Form.Label>Enter Doctor Id</Form.Label>
-                        <Form.Control required type="text" name="doctor_id" value={this.state.doctor_id} onChange={this.detailsChange} /*placeholder="Your Name"*/ />
-                    </Form.Group>
-
-
-                    <Button size="lg" variant="primary" type="submit">
-                        Submit
-                    </Button>
-                </Form>
+                <div className="DelegateConsent">
+                    <h1>DELEGATE CONSENT</h1>
+                    <Form onSubmit = {this.submitDelegateConsent}>
+                        <Form.Group className="mb-3" controlId="formBasicPatientId">
+                            <Form.Label>Enter Doctor Id</Form.Label>
+                            <Form.Control required type="text" name="doctor_id" value={this.state.doctor_id} onChange={this.detailsChange} /*placeholder="Your Name"*/ />
+                        </Form.Group>
+    
+    
+                        <Button size="lg" variant="primary" type="submit">
+                            Submit
+                        </Button>
+                    </Form>
+                </div>
+                  
+            );
+        }
+        else{
+            <div>
+                <h1>UNAUTHORIZED</h1>
             </div>
-              
-        );
+        }
+
     }
 
 }

@@ -65,19 +65,12 @@ const AdminLogin = () => {
   );
 };
 
-const AddDoctor = (props) => {
-  return props.adminLoginStatus ? (
+const AddDoctor = () => {
+  return (
     <>
       <Navbar />
       <section className="hero-section">
         <AddDoctorPage/>
-      </section>
-    </>
-  ):(
-    <>
-      <Navbar />
-      <section className="hero-section">
-        <h1>Unauthorized</h1>
       </section>
     </>
   );
@@ -109,72 +102,44 @@ const DoctorRegister= () => {
 };
 
 
-const GrantedConsent= (props) => {
-  return props.doctorLoginStatus ? (
+const GrantedConsent= () => {
+  return (
     <>
       <Navbar />
       <section className="hero-section">
         <GrantedConsentPage/>
       </section>
     </>
-  ):(
-    <>
-      <Navbar />
-      <section className="hero-section">
-        <h1>Unauthorized</h1>
-      </section>
-    </>
   );
 };
 
-const RequestConsent = (props) => {
-  return props.doctorLoginStatus ? (
+const RequestConsent = () => {
+  return (
     <>
       <Navbar />
       <section className="hero-section">
         <RequestConsentPage/>
       </section>
     </>
-  ):(
-    <>
-      <Navbar />
-      <section className="hero-section">
-        <h1>Unauthorized</h1>
-      </section>
-    </>
   );
 };
-const View = (props) => {
-  return props.doctorLoginStatus ? (
+const View = () => {
+  return (
     <>
       <Navbar />
       <section className="hero-section">
         <ViewEHR/>
       </section>
     </>
-  ):(
-    <>
-      <Navbar />
-      <section className="hero-section">
-        <h1>Unauthorized</h1>
-      </section>
-    </>
   );
 };
 
-const DelegateConsent = (props) => {
-  return props.doctorLoginStatus ? (
+const DelegateConsent = () => {
+  return (
     <>
       <Navbar />
       <section className="hero-section">
         <DelegateConsentPage/>
-      </section>
-    </>
-  ):(
-    <>
-      <Navbar />
-      <section className="hero-section">
-        <h1>Unauthorized</h1>
       </section>
     </>
   );
@@ -316,7 +281,7 @@ const App = () => {
       </Route>
 
       <Route path="/add-doctor">
-        <AddDoctor adminLoginStatus={adminLoginStatus}/>
+        <AddDoctor />
       </Route>
 
       <Route path="/register-doctor">
@@ -331,13 +296,13 @@ const App = () => {
         <AdminLogout />
       </Route>
       <Route path="/granted-consents">
-        <GrantedConsent doctorLoginStatus={doctorLoginStatus}/>
+        <GrantedConsent />
       </Route>
       <Route path="/request-consents">
-        <RequestConsent doctorLoginStatus={doctorLoginStatus}/>
+        <RequestConsent />
       </Route>
       <Route path="/view-ehr/:patientId/:consentId">
-        <View doctorLoginStatus={doctorLoginStatus}/>
+        <View />
       </Route>
       <Route path="/create-login">
         <CreateDoctorLogin />
@@ -346,7 +311,7 @@ const App = () => {
         <VerifyOtp />
       </Route>
       <Route path="/delegate-consent-doc/:consentId">
-        <DelegateConsent doctorLoginStatus={doctorLoginStatus}/>
+        <DelegateConsent />
       </Route>
     </Switch>
   );
