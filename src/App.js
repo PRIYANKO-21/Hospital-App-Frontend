@@ -10,6 +10,7 @@ import GrantedConsentPage from './components/grantedConsents';
 import RequestConsentPage from './components/requestConsent';
 import ViewEHR from './components/viewEHR';
 import CreateDoctorLoginPage from './components/createDoctorLogin';
+import DelegateConsentPage from "./components/delegateConsent";
 import VerifyOtpPage from './components/otpVerification';
 import AddRecordsInitialPage from './components/Addrecord_send_otp';
 import VerifyOtptoAddrecordsPage from './components/otp_verification_to_add_records';
@@ -67,19 +68,12 @@ const AdminLogin = () => {
   );
 };
 
-const AddDoctor = (props) => {
-  return props.adminLoginStatus ? (
+const AddDoctor = () => {
+  return (
     <>
       <Navbar />
       <section className="hero-section">
         <AddDoctorPage/>
-      </section>
-    </>
-  ):(
-    <>
-      <Navbar />
-      <section className="hero-section">
-        <h1>Unauthorized</h1>
       </section>
     </>
   );
@@ -111,41 +105,28 @@ const DoctorRegister= () => {
 };
 
 
-const GrantedConsent= (props) => {
-  return props.doctorLoginStatus ? (
+const GrantedConsent= () => {
+  return (
     <>
       <Navbar />
       <section className="hero-section">
         <GrantedConsentPage/>
       </section>
     </>
-  ):(
-    <>
-      <Navbar />
-      <section className="hero-section">
-        <h1>Unauthorized</h1>
-      </section>
-    </>
   );
 };
 
-const RequestConsent = (props) => {
-  return props.doctorLoginStatus ? (
+const RequestConsent = () => {
+  return (
     <>
       <Navbar />
       <section className="hero-section">
         <RequestConsentPage/>
       </section>
     </>
-  ):(
-    <>
-      <Navbar />
-      <section className="hero-section">
-        <h1>Unauthorized</h1>
-      </section>
-    </>
   );
 };
+
 
 const AddRecordsInitial = (props) => {
   return props.doctorLoginStatus ? (
@@ -203,19 +184,24 @@ const AddRecords = (props) => {
 };
 
 
-const View = (props) => {
-  return props.doctorLoginStatus ? (
+const View = () => {
+  return (
+
     <>
       <Navbar />
       <section className="hero-section">
         <ViewEHR/>
       </section>
     </>
-  ):(
+  );
+};
+
+const DelegateConsent = () => {
+  return (
     <>
       <Navbar />
       <section className="hero-section">
-        <h1>Unauthorized</h1>
+        <DelegateConsentPage/>
       </section>
     </>
   );
@@ -274,6 +260,7 @@ const App = () => {
   const isInitialMount = useRef(true);
   //Restricting useEffect to run only on updates except initial mount
   useEffect(() => {
+    
     if (isInitialMount.current) {
       //findCookie();
 
@@ -356,7 +343,7 @@ const App = () => {
       </Route>
 
       <Route path="/add-doctor">
-        <AddDoctor adminLoginStatus={adminLoginStatus}/>
+        <AddDoctor />
       </Route>
 
       <Route path="/register-doctor">
@@ -371,13 +358,13 @@ const App = () => {
         <AdminLogout />
       </Route>
       <Route path="/granted-consents">
-        <GrantedConsent doctorLoginStatus={doctorLoginStatus}/>
+        <GrantedConsent />
       </Route>
       <Route path="/request-consents">
-        <RequestConsent doctorLoginStatus={doctorLoginStatus}/>
+        <RequestConsent />
       </Route>
       <Route path="/view-ehr/:patientId/:consentId">
-        <View doctorLoginStatus={doctorLoginStatus}/>
+        <View />
       </Route>
       <Route path="/create-login">
         <CreateDoctorLogin />
@@ -385,6 +372,7 @@ const App = () => {
       <Route path="/verify-otp/:doctorId">
         <VerifyOtp />
       </Route>
+
 
       <Route path="/add-record-initial">
         <AddRecordsInitial doctorLoginStatus={doctorLoginStatus}/>
@@ -396,6 +384,11 @@ const App = () => {
 
       <Route path="/add-record/:patientId">
         <AddRecords doctorLoginStatus={doctorLoginStatus}/>
+      </Route>
+
+
+      <Route path="/delegate-consent-doc/:consentId">
+        <DelegateConsent />
       </Route>
 
     </Switch>

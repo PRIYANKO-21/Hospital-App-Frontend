@@ -17,7 +17,9 @@ class GrantedConsentPage extends Component {
         loading:true,
         getEhrResp : false,
         pid : '',
-        cid : ''
+        cid : '',
+        Vehr : false,
+        isDoctorLoggedIn : this.getCookie('doctor_cookie')!==undefined ? true : false
       }
     }
 
@@ -59,9 +61,7 @@ class GrantedConsentPage extends Component {
 
 
 
-    componentDidMount(){
-      this.getUsersData()
-    }
+    
     render() {
       const columns = [{  
         Header: 'Patient ID',  
@@ -97,6 +97,7 @@ class GrantedConsentPage extends Component {
             //window.location.href='http://localhost:8081/get-ehr/'+original.patient_id+'/'+original.consent_id;
             this.setState({pid:original.patient_id,cid:original.consent_id})
             this.getData(original.patient_id,original.consent_id)  ;
+            this.setState({Vehr:true});
           }}
         >
           View Record
@@ -104,23 +105,59 @@ class GrantedConsentPage extends Component {
           // <td>
           // <NavLink to={"/view-ehr/"+original.patient_id+'/'+original.consent_id}> View Record </NavLink>
           // </td>
+        },
+
+        {
+          Header: 'View',  
+        accessor: 'email',
+       Cell: ({ original }) => (
+        <button
+          type="button"
+          onClick={(e) => {
+          console.log(original);
+            e.preventDefault();
+            //window.location.href='http://localhost:8081/get-ehr/'+original.patient_id+'/'+original.consent_id;
+            this.setState({cid:original.consent_id})
+            this.getData(original.consent_id)  ;
+          }}
+        >
+          Delegate Consent
+        </button>)
+          // <td>
+          // <NavLink to={"/view-ehr/"+original.patient_id+'/'+original.consent_id}> View Record </NavLink>
+          // </td>
         }
         
+        
     ]
-    if(!this.state.getEhrResp){
-      return (
-        <div style={{marginTop:"200px"}}>
-          <ReactTable  
-          data={this.state.users}  
-          columns={columns}  
-          />
-        </div>
-
-      )      
+    if(this.state.isDoctorLoggedIn){
+      if(!this.state.getEhrResp){
+        return (
+          <div style={{marginTop:"200px"}}>
+            <ReactTable  
+            data={this.state.users}  
+            columns={columns}  
+            />
+          </div>
+  
+        )      
+      }
+      else{
+        if(this.state.Vehr == true)
+        return <Redirect to = {{ pathname: "/view-ehr/" + this.state.pid+'/'+this.state.cid }} />;
+        else if(this.state.Vehr == false)
+        return <Redirect to = {{ pathname: "/delegate-consent-doc/" + this.state.cid }} />;
+      }
     }
     else{
-      return <Redirect to = {{ pathname: "/view-ehr/" + this.state.pid+'/'+this.state.cid }} />;
+      return(
+        <div>
+          <h1>UNAUTHORIZED</h1>
+        </div>
+      );
+
     }
+
 
     }
   }

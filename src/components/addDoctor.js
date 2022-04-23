@@ -16,8 +16,9 @@ class AddDoctorPage extends Component {
     super(props);
     this.state = {
         doctor_email : '',
-        isLoggedIn: false
+        isAdminLoggedIn: this.getCookie('admin_cookie')!==undefined ? true : false
     }
+    console.log(this.state.isAdminLoggedIn);
     this.submitAddDoctor = this.submitAddDoctor.bind(this);
     this.detailsChange = this.detailsChange.bind(this);
   }
@@ -47,8 +48,10 @@ class AddDoctorPage extends Component {
       axios.post('http://localhost:8082/add-doctor', this.state, {headers})
       .then(response => 
         {
+          console.log(response);
           if(response.status==200){
-            alert("Doctor Added!");
+            console.log(response);
+            alert("Doctor Added with Id = "+ response.data + "Now kindly ask Doctor to create a Login with this Id");
           }
           else{
             alert("Doctor not added.Please Try Again");
@@ -72,7 +75,7 @@ class AddDoctorPage extends Component {
 
   render(){
 
-    if(!this.state.isLoggedIn){
+    if(this.state.isAdminLoggedIn){
       return (
         <div className="AddDoctorPage">
           <h1>Add Doctor Page</h1>
@@ -99,7 +102,11 @@ class AddDoctorPage extends Component {
       );
     }
     else{
-      return <Redirect to = {{ pathname: "/" }} />;
+      return (
+        <div>
+          <h1>UNAUTHORIZED</h1>
+        </div>
+      )
     }
 
   }

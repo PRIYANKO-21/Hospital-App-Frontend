@@ -17,7 +17,8 @@ class DoctorLoginPage extends Component {
     this.state = {
         username : '',
         password : '',
-        isLoggedIn: false
+        isLoggedIn: false,
+        doctorLoginStatus : false
     }
     this.submitPatientLogin = this.submitPatientLogin.bind(this);
     this.detailsChange = this.detailsChange.bind(this);
@@ -42,6 +43,7 @@ class DoctorLoginPage extends Component {
           }
           else{
             this.setState({isLoggedIn : true});
+            this.setState({doctorLoginStatus: true});
             //setting the cookie here
             document.cookie = "doctor_cookie=" + response.data;
             console.log("Doctor Cookie set");
@@ -66,7 +68,7 @@ class DoctorLoginPage extends Component {
     if(!this.state.isLoggedIn){
       return (
         <div className="LoginPage">
-          <h1>LOGIN PAGE</h1>
+          <h1>DOCTOR LOGIN PAGE</h1>
           <Form onSubmit={this.submitPatientLogin}>
             <Form.Group size="lg" className="form" controlId="formBasicPatientUsername">
               <Form.Label>Email</Form.Label>

@@ -72,7 +72,7 @@ class AdminLoginPage extends Component {
     if(!this.state.isLoggedIn){
       return (
         <div className="AdminLoginPage">
-          <h1>LOGIN PAGE</h1>
+          <h1>ADMIN LOGIN PAGE</h1>
           <Form onSubmit={this.submitAdminLogin}>
             <Form.Group size="lg" className="form" controlId="formBasicAdminEmail">
               <Form.Label>Email</Form.Label>

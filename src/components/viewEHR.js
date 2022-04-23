@@ -14,7 +14,8 @@ class ViewEHR extends Component{
           record : {},
           pid : '',
           cid : '',
-          goAhead : false
+          goAhead : false,
+          isDoctorLoggedIn : this.getCookie('doctor_cookie')!==undefined ? true : false
         }
       }
 
@@ -77,7 +78,8 @@ getCookie(cName) {
 
         console.log("Params" + this.props.match.params.patientId);
         //console.log(record)
-        if(this.state.goAhead){
+        if(this.state.isDoctorLoggedIn){
+          if(this.state.goAhead){
             return(
                 <>
                 
@@ -120,10 +122,19 @@ getCookie(cName) {
                    </>
     
             )            
+          }
+          else{
+              return <h1>Loading...</h1>
+          }          
         }
         else{
-            return <h1>Loading...</h1>
+          return (
+            <div>
+              <h1>UNAUTHORIZED</h1>
+            </div>
+          );
         }
+
 
     }
 }

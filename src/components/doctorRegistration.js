@@ -96,10 +96,10 @@ class DoctorRegistrationPage extends Component{
                         </Form.Group>
     
     
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
+{/*                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" name="doctor_password" value={this.state.doctor_password} onChange={this.detailsChange} placeholder="Password" />
-                        </Form.Group>
+                            <Form.Control required type="password" name="doctor_password" value={this.state.doctor_password} onChange={this.detailsChange} placeholder="Password" />
+                        </Form.Group> */}
     
     
                         <Button size="lg" variant="primary" type="submit">
