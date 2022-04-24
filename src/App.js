@@ -128,56 +128,35 @@ const RequestConsent = () => {
 };
 
 
-const AddRecordsInitial = (props) => {
-  return props.doctorLoginStatus ? (
+const AddRecordsInitial = () => {
+  return (
     <>
       <Navbar />
       <section className="hero-section">
         <AddRecordsInitialPage/>
       </section>
     </>
-  ):(
-    <>
-      <Navbar />
-      <section className="hero-section">
-        <h1>Unauthorized</h1>
-      </section>
-    </>
-  );
+  )
 };
 
-const VerifyOtpToAddRecords = (props) => {
-  return props.doctorLoginStatus ? (
+const VerifyOtpToAddRecords = () => {
+  return (
     <>
       <Navbar />
       <section className="hero-section">
         <VerifyOtptoAddrecordsPage/>
       </section>
     </>
-  ):(
-    <>
-      <Navbar />
-      <section className="hero-section">
-        <h1>Unauthorized</h1>
-      </section>
-    </>
   );
 };
 
 
-const AddRecords = (props) => {
-  return props.doctorLoginStatus ? (
+const AddRecords = () => {
+  return (
     <>
       <Navbar />
       <section className="hero-section">
         <AddRecordsPage/>
-      </section>
-    </>
-  ):(
-    <>
-      <Navbar />
-      <section className="hero-section">
-        <h1>Unauthorized</h1>
       </section>
     </>
   );
@@ -375,15 +354,15 @@ const App = () => {
 
 
       <Route path="/add-record-initial">
-        <AddRecordsInitial doctorLoginStatus={doctorLoginStatus}/>
+        <AddRecordsInitial />
       </Route>
 
       <Route path="/verify-otp-to-add-record/:patientId">
-        <VerifyOtpToAddRecords doctorLoginStatus={doctorLoginStatus}/>
+        <VerifyOtpToAddRecords />
       </Route>
 
       <Route path="/add-record/:patientId">
-        <AddRecords doctorLoginStatus={doctorLoginStatus}/>
+        <AddRecords />
       </Route>
 
 

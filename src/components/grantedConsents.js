@@ -7,6 +7,9 @@ import viewEHR from './viewEHR.js';
 import {Link} from "react-router-dom";
 import { Redirect } from 'react-router';
 import { NavLink } from 'react-bootstrap';
+import Button from "react-bootstrap/Button";
+import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
+
 import './grantedConsents.css'
 
 class GrantedConsentPage extends Component {
@@ -42,8 +45,12 @@ class GrantedConsentPage extends Component {
           'Authorization': `Bearer ${token}`
         }
       })
-      console.log(res.data)
+      //console.log(res.data.delegateAccess.toLowerCase())
+      console.log(res.data);
+
+
       this.setState({loading:false, users: res.data})
+      console.log(this.state.users);
     }
 
     async getData(pid,cid){
@@ -84,12 +91,11 @@ class GrantedConsentPage extends Component {
         Header: 'Validity',  
         accessor: 'validity',
         },
-
         {
           Header: 'View',  
         accessor: 'email',
        Cell: ({ original }) => (
-        <button
+        <Button className = "buttonsize" size="lg"
           type="button"
           onClick={(e) => {
           console.log(original);
@@ -101,33 +107,34 @@ class GrantedConsentPage extends Component {
           }}
         >
           View Record
-        </button>)
+        </Button>)
           // <td>
           // <NavLink to={"/view-ehr/"+original.patient_id+'/'+original.consent_id}> View Record </NavLink>
           // </td>
         },
-
+        
         {
+        
           Header: 'View',  
-        accessor: 'email',
-       Cell: ({ original }) => (
-        <button
-          type="button"
-          onClick={(e) => {
-          console.log(original);
-            e.preventDefault();
-            //window.location.href='http://localhost:8081/get-ehr/'+original.patient_id+'/'+original.consent_id;
-            this.setState({cid:original.consent_id})
-            this.getData(original.consent_id)  ;
-          }}
-        >
-          Delegate Consent
-        </button>)
+          accessor: 'email',
+          Cell: ({ original }) => (
+            <Button className = "buttonsize" size="lg"
+              type="button"
+              onClick={(e) => {
+              console.log(original);
+                e.preventDefault();
+                //window.location.href='http://localhost:8081/get-ehr/'+original.patient_id+'/'+original.consent_id;
+                this.setState({cid:original.consent_id})
+                this.getData(original.consent_id)  ;
+              }}>
+              Delegate
+            </Button>
+          )
           // <td>
           // <NavLink to={"/view-ehr/"+original.patient_id+'/'+original.consent_id}> View Record </NavLink>
           // </td>
         }
-        
+
         
     ]
     if(this.state.isDoctorLoggedIn){
@@ -138,6 +145,7 @@ class GrantedConsentPage extends Component {
             data={this.state.users}  
             columns={columns}  
             />
+
           </div>
   
         )      

@@ -19,7 +19,8 @@ class VerifyOtptoAddrecordsPage extends Component {
     super(props);
     this.state = {
         otp : '',
-        isverified :false
+        isverified :false,
+        isDoctorLoggedIn : this.getCookie('doctor_cookie')!==undefined ? true : false
     }
     this.submitAddrecord = this.submitAddrecord.bind(this);
     this.detailsChange = this.detailsChange.bind(this);
@@ -84,38 +85,48 @@ class VerifyOtptoAddrecordsPage extends Component {
 
 
   render(){
-    if(!this.state.isverified){
-    const {match,location,history} = this.props;
-  
-      return (
-        <div className="VerifyOtp">
-          <h1>Verify Otp</h1>
-          <Form onSubmit={this.submitAddrecord}>
-            <Form.Group size="lg" className="form" controlId="formBasicVerifyOtp">
-              <Form.Label>Enter Otp</Form.Label>
-              <Form.Control
-                required
-                autoFocus
-                type="text"
-                value={this.state.otp}
-                name = "otp"
-                onChange={this.detailsChange}
-                placeholder = "Enter Otp send to your mail"
-              />
-            </Form.Group>
-            <Button size="lg" type="submit">
-              Verify Otp
-            </Button>
-          </Form>
-  
-        </div>
-       
-      );
-  
+    if(this.state.isDoctorLoggedIn){
+      if(!this.state.isverified){
+        const {match,location,history} = this.props;
+      
+        return (
+          <div className="VerifyOtp">
+            <h1>Verify Otp</h1>
+            <Form onSubmit={this.submitAddrecord}>
+              <Form.Group size="lg" className="form" controlId="formBasicVerifyOtp">
+                <Form.Label>Enter Otp</Form.Label>
+                <Form.Control
+                  required
+                  autoFocus
+                  type="text"
+                  value={this.state.otp}
+                  name = "otp"
+                  onChange={this.detailsChange}
+                  placeholder = "Enter Otp send to your mail"
+                />
+              </Form.Group>
+              <Button size="lg" type="submit">
+                Verify Otp
+              </Button>
+            </Form>
+    
+          </div>
+         
+        );
+      
       }
       else{
         return <Redirect to = {{ pathname: "/add-record/"+this.props.match.params.patientId}} />
       }
+    
+    }
+    else{
+      return(
+        <div>
+          <h1>UNAUTHORIZED</h1>
+        </div>
+    );
+    }
   }
 
 }

@@ -13,7 +13,8 @@ class AddRecordsInitialPage extends Component{
         super(props);
         this.state = {
           patient_id : '',
-          isverified :false
+          isverified :false,
+          isDoctorLoggedIn : this.getCookie('doctor_cookie')!==undefined ? true : false
         }
         this.submitAddRecord = this.submitAddRecord.bind(this);
         this.detailsChange = this.detailsChange.bind(this);
@@ -62,29 +63,41 @@ class AddRecordsInitialPage extends Component{
     }
     
     render(){
-        if(!this.state.isverified){
-        return (
+        if(this.state.isDoctorLoggedIn){
+            if(!this.state.isverified){
+                return (
+                
+                    <div className="RequestConsent">
+                        <h1>ADD RECORD</h1>
+                        <Form onSubmit = {this.submitAddRecord}>
+                            <Form.Group className="mb-3" controlId="formBasicPatientId">
+                                <Form.Label>Enter Patient Id</Form.Label>
+                                <Form.Control required type="text" name="patient_id" value={this.state.patient_id} onChange={this.detailsChange} /*placeholder="Your Name"*/ />
+                            </Form.Group>
         
-            <div className="RequestConsent">
-                <h1>ADD RECORD</h1>
-                <Form onSubmit = {this.submitAddRecord}>
-                    <Form.Group className="mb-3" controlId="formBasicPatientId">
-                        <Form.Label>Enter Patient Id</Form.Label>
-                        <Form.Control required type="text" name="patient_id" value={this.state.patient_id} onChange={this.detailsChange} /*placeholder="Your Name"*/ />
-                    </Form.Group>
-
-
-                    <Button size="lg" variant="primary" type="submit">
-                        Submit
-                    </Button>
-                </Form>
-            </div>
-              
-        );
+        
+                            <Button size="lg" variant="primary" type="submit">
+                                Submit
+                            </Button>
+                        </Form>
+                    </div>
+                      
+                );
+            }
+            else{
+                return <Redirect to = {{ pathname: "/verify-otp-to-add-record/"+this.state.patient_id }} />
+            }
         }
         else{
-            return <Redirect to = {{ pathname: "/verify-otp-to-add-record/"+this.state.patient_id }} />
+            return(
+                <div>
+                    <h1>UNAUTHORIZED</h1>
+                </div>
+            );
+
         }
+
+
     }
 }
 

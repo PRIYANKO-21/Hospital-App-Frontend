@@ -1,6 +1,7 @@
-button{
-    width:80px !important;
+.buttonsize{
+    width:100px !important;
 }
+
 
 .ReactTable{
     margin:0 auto;
@@ -13,3 +14,7 @@ button{
 .rt-td{
     width:160px !important;
 }
+
+
+
+

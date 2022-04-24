@@ -94,7 +94,7 @@ class AddRecordPage extends Component {
 
   render(){
 
-    if(!this.state.isDoctorLoggedIn){
+    if(this.state.isDoctorLoggedIn){
       if(!this.state.isRecordAdded){
         return (
           <div className="AddRecord">
