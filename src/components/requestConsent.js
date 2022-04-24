@@ -84,10 +84,8 @@ class RequestConsentPage extends Component{
                             <Form.Control
               as="select"
               name="access_purpose"
-              onChange={e => {
-                console.log("e.target.value", e.target.value);
-                //setType(e.target.value);
-              }}
+              value = {this.state.access_purpose}
+              onChange={this.detailsChange}
              
             >
               <option value="Surgery">Surgery</option>
