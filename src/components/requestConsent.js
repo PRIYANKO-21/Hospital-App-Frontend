@@ -44,10 +44,13 @@ class RequestConsentPage extends Component{
       axios.post('http://localhost:8082/request-consent', this.state, { headers })
        .then(response => 
          {
-           console.log("return post method");
-           //console.log(response);
-            console.log(response);
-           // xPaths = response.data.xPaths;
+            if(response.status===200){
+               
+                alert("Consent requested Successfully");
+            }
+            else{
+                alert("Error... ");
+            }
          }
       );
   }

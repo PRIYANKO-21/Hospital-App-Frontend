@@ -5,7 +5,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Jost", sans-serif;
-  
+  overflow-y: scroll;
 }
 
 

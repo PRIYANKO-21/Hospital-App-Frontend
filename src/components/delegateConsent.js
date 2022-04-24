@@ -51,10 +51,13 @@ class DelegateConsentPage extends Component{
       axios.post('http://localhost:8082/delegate-consent/'+this.state.doctor_id+'/'+this.props.match.params.consentId,this.state, {headers})
        .then(response => 
          {
-           console.log("return post method");
-           //console.log(response);
-            console.log(response);
-           // xPaths = response.data.xPaths;
+            if(response.status===200){
+               
+                alert("Consent delegated Successfully");
+            }
+            else{
+                alert("Error... ");
+            }
          }
       );
   }
@@ -89,9 +92,12 @@ class DelegateConsentPage extends Component{
             );
         }
         else{
-            <div>
-                <h1>UNAUTHORIZED</h1>
-            </div>
+            return(
+                <div>
+                    <h1>UNAUTHORIZED</h1>
+                </div>
+            )
+
         }
 
     }

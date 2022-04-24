@@ -74,7 +74,7 @@ getCookie(cName) {
 
         //var { record } = this.state;
         //console.log("HEre")
-        //console.log(this.state.record.episodesDTOList);
+        console.log(this.state.record.episodesDTOList);
 
         console.log("Params" + this.props.match.params.patientId);
         //console.log(record)
@@ -91,14 +91,9 @@ getCookie(cName) {
                                       <li className="episodes">Episode Name : {episodeName}</li>
                                 {
                                   encounters.map(({doctorName,encounterId,op_records})=>(
+                                    //{console.log("Inside encounters")}
                                      <div>
                                          <h3 className="episodes">Encounters :</h3>  
-                                   
-                          <div className="row">
-                            <div className="col-md-6">
-    
-                      </div>
-                    </div>
                                          <li className="encounter">Doctor Name : {doctorName}</li>
                                          <li className="encounter">Encounter Id : {encounterId}</li>
                                            
@@ -112,9 +107,9 @@ getCookie(cName) {
                                                   <li className="op_records">Timestamp : {timestamp}</li>                                
                                                 </div>
                                               ))
-                                      }
-                                      </div>
-                                  ))
+                                        }
+                                    </div>
+                                ))
                               }
                             </div>
                           ))
