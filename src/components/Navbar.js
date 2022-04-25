@@ -197,7 +197,7 @@ const Navbar = () => {
               <NavLink to="/granted-consents">Granted Consents</NavLink>
             </li>
             <li>
-              <NavLink to="/request-consents">Request Consents</NavLink>
+              <NavLink to="/request-consents">Request Consent</NavLink>
             </li>
             <li>
               <NavLink to="/add-record-initial">Add Record</NavLink>

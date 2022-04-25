@@ -70,83 +70,72 @@ class GrantedConsentPage extends Component {
 
     
     render() {
-      const columns = [{  
-        Header: 'Patient ID',  
-        accessor: 'patient_id',
-       }
-       ,{  
-        Header: 'Patient Name',  
-        accessor: 'patientName' ,
-        }
-       
-       ,{  
-       Header: 'Consent Id',  
-       accessor: 'consent_id' ,
-       }
-       ,{  
-       Header: 'Delegate Access',  
-       accessor: 'delegateAccess',
-       },
-       {  
-        Header: 'Validity',  
-        accessor: 'validity',
-        },
-        {
-          Header: 'View',  
-        accessor: 'email',
-       Cell: ({ original }) => (
-        <Button className = "buttonsize" size="lg"
-          type="button"
-          onClick={(e) => {
-          console.log(original);
-            e.preventDefault();
-            //window.location.href='http://localhost:8081/get-ehr/'+original.patient_id+'/'+original.consent_id;
-            this.setState({pid:original.patient_id,cid:original.consent_id})
-            this.getData(original.patient_id,original.consent_id)  ;
-            this.setState({Vehr:true});
-          }}
-        >
-          View Record
-        </Button>)
-          // <td>
-          // <NavLink to={"/view-ehr/"+original.patient_id+'/'+original.consent_id}> View Record </NavLink>
-          // </td>
-        },
-        
-        {
-        
-          Header: 'View',  
-          accessor: 'email',
-          Cell: ({ original }) => (
-            <Button className = "buttonsize" size="lg"
-              type="button"
-              onClick={(e) => {
-              console.log(original);
-                e.preventDefault();
-                //window.location.href='http://localhost:8081/get-ehr/'+original.patient_id+'/'+original.consent_id;
-                this.setState({cid:original.consent_id})
-                this.getData(original.consent_id)  ;
-              }}>
-              Delegate
-            </Button>
-          )
-          // <td>
-          // <NavLink to={"/view-ehr/"+original.patient_id+'/'+original.consent_id}> View Record </NavLink>
-          // </td>
-        }
 
-        
-    ]
     if(this.state.isDoctorLoggedIn){
       if(!this.state.getEhrResp){
         return (
-          <div style={{marginTop:"200px"}}>
-            <ReactTable  
-            data={this.state.users}  
-            columns={columns}  
-            />
+          <MDBTable striped style={{"width":"80vw","fontSize":"1.4rem"}}>
+          <MDBTableHead>
+            <tr>
+              <th>Patient ID</th>
+              <th>Patient Name</th>
+              <th>Consent Id</th>
+              <th>Delegate Access</th>
+              <th>Validity</th>
+              <th>View Consent</th>
+              <th>Delegate Consent</th>
+            </tr>
+          </MDBTableHead>
+          <MDBTableBody>
+            {
+              this.state.users.map((obj)=>(
+               <tr>
+                  <td>{obj.patient_id}</td>
+                  <td>{obj.patientName}</td>
+                  <td>{obj.consent_id}</td>
+                  <td>{obj.delegateAccess}</td>
+                  <td>{obj.validity}</td>
+                  <td>
+                    <Button className = "buttonsize" size="lg" type="button"
+                        onClick={(e) => {
 
-          </div>
+                            e.preventDefault();
+                            this.setState({pid:obj.patient_id,cid:obj.consent_id})
+                            this.getData(obj.patient_id,obj.consent_id)  ;
+                            this.setState({Vehr:true});
+                        }}
+                    >
+                        View Record
+                    </Button>
+                  
+                  </td>
+                  {obj.delegateAccess==="Yes" ?  (
+                    <td>
+                      <Button className = "buttonsize" size="lg" type="button"
+                          onClick={(e) => {
+                            console.log(obj);
+                              e.preventDefault();
+                              this.setState({cid:obj.consent_id})
+                              this.getData(obj.consent_id)  ;
+
+                          }}
+                      >
+                          Delegate
+                      </Button>
+                  
+                    </td>
+                  ) :
+                    <td></td>
+                  }
+
+              </tr>   		
+              
+              
+              ))
+            }
+    
+          </MDBTableBody>
+        </MDBTable>
   
         )      
       }
