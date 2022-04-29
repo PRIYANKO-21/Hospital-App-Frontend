@@ -12,18 +12,16 @@ import './doctorLogin.css';
 
 
 
-class VerifyOtpPage extends Component {
+class DoctorRegisterOtpVerificationPage extends Component {
 
 
   constructor(props){
     super(props);
     this.state = {
         otp : '',
-        isLoggedInStatus: false,
-        isOtpVerified : false
-
+        isverified :false
     }
-    this.submitAddDoctor = this.submitAddDoctor.bind(this);
+    this.submitAddrecord = this.submitAddrecord.bind(this);
     this.detailsChange = this.detailsChange.bind(this);
   }
 
@@ -34,11 +32,11 @@ class VerifyOtpPage extends Component {
   };
 
 
-  submitAddDoctor(event){
+  submitAddrecord(event){
       console.log(this.state);
       console.log(this.props);
       event.preventDefault();
-      //const token = this.getCookie('doctor_cookie');
+
       const headers = { 
         "Content-Type": "application/json" ,
         "Access-Control-Allow-Origin": "*",
@@ -47,12 +45,12 @@ class VerifyOtpPage extends Component {
 
       
       
-      axios.post('http://localhost:8082/validate-otp/'+this.props.match.params.doctorId+'/'+this.state.otp, this.state, {headers})
+      axios.post('http://localhost:8082/validate-otp/'+this.props.match.params.doctorId+'/'+this.state.otp, {headers})
       .then(response => 
         {
           if(response.status===200){
-            alert("Otp Validation Successful!. Your account will be verified by admin and you will receive an email after verification. Post that you can login.");
-            this.setState({isOtpVerified:true});
+            alert("Otp Validation Successful!");
+            this.setState({isverified: true});
           }
           else{
             alert("Wrong Otp Entered Try again");
@@ -67,19 +65,21 @@ class VerifyOtpPage extends Component {
       });
   }
 
+  headers = {
+      "Content-Type": "application/json"
+  };
 
-  
-  //Restricting useEffect to run only on updates except initial mount
-  
+
 
 
   render(){
-    const {match,location,history} = this.props;
-    if(!this.state.isOtpVerified){
+    if(!this.state.isverified){
+      const {match,location,history} = this.props;
+    
       return (
         <div className="VerifyOtp">
           <h1>Verify Otp</h1>
-          <Form onSubmit={this.submitAddDoctor}>
+          <Form onSubmit={this.submitAddrecord}>
             <Form.Group size="lg" className="form" controlId="formBasicVerifyOtp">
               <Form.Label>Enter Otp</Form.Label>
               <Form.Control
@@ -96,19 +96,19 @@ class VerifyOtpPage extends Component {
               Verify Otp
             </Button>
           </Form>
-  
+
         </div>
        
       );
+    
     }
     else{
-      return <Redirect to = {{ pathname: "/login-doctor" }} />;
+      return <Redirect to = {{ pathname: "/login-doctor"}} />
     }
-
   }
 
 }
 
 //export default VerifyOtpPage;
-const CreateConsentWithRouter = withRouter(VerifyOtpPage);
+const CreateConsentWithRouter = withRouter(DoctorRegisterOtpVerificationPage);
 export default CreateConsentWithRouter;

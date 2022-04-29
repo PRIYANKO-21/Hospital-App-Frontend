@@ -15,6 +15,8 @@ import VerifyOtpPage from './components/otpVerification';
 import AddRecordsInitialPage from './components/Addrecord_send_otp';
 import VerifyOtptoAddrecordsPage from './components/otp_verification_to_add_records';
 import AddRecordsPage from './components/addrecord';
+import DoctorRegisterOtpVerificationPage from './components/doctorRegisterOtpVerification';
+import DoctorRegistrationRequestsPage from './components/doctorCreateLoginRequests';
 let isLoggedIn = false;
 
 function getCookie(name) {
@@ -197,6 +199,31 @@ const VerifyOtp = () => {
   )
 };
 
+
+const DoctorRegisterOtpVerification = () => {
+  return (
+    <>
+      <Navbar />
+      <section className="hero-section">
+        <DoctorRegisterOtpVerificationPage/>
+      </section>
+    </>
+  )
+};
+
+
+const DoctorRegistrationRequests = () => {
+  return (
+    <>
+      <Navbar />
+      <section className="hero-section">
+        <DoctorRegistrationRequestsPage/>
+      </section>
+    </>
+  )
+};
+
+
 const DoctorLogout= () => {
   document.cookie = "doctor_cookie" + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
   
@@ -369,6 +396,15 @@ const App = () => {
       <Route path="/delegate-consent-doc/:consentId">
         <DelegateConsent />
       </Route>
+
+
+      <Route path="/verify-otp-register-doctor/:doctorId">
+        <DoctorRegisterOtpVerification />
+      </Route>
+
+      <Route path="/doctor-registration-requests">
+        <DoctorRegistrationRequests />
+      </Route>      
 
     </Switch>
   );

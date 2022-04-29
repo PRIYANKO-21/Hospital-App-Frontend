@@ -167,8 +167,15 @@ const Navbar = () => {
             </li>
 
             <li>
+              <NavLink to="/doctor-registration-requests">Registration Requests</NavLink>
+            </li>
+
+            <li>
               <NavLink to="/logout-admin">Logout</NavLink>
             </li>
+
+
+
           </ul>
         </div>
       </nav>

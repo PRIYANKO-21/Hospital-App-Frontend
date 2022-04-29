@@ -41,7 +41,7 @@ class DoctorRegistrationPage extends Component{
 
             if(response.status===200){
                 this.setState({isRegistrationSuccessFul : true});
-                alert("Registration Successful!! Kindly Login Now");
+                alert("Verify Otp To successfully complete Registration");
             }
             else{
                 alert("Wrong Details Entered.Enter Correct details");
@@ -111,7 +111,7 @@ class DoctorRegistrationPage extends Component{
             );
         }
         else{
-            return <Redirect to = {{ pathname: "/login-doctor" }} />;
+            return <Redirect to = {{ pathname: "/verify-otp-register-doctor/"+this.state.doctor_id }} />;
         }
 
     }

@@ -102,7 +102,7 @@ class AddRecordPage extends Component {
             <Form onSubmit={this.submitAddrecord}>
               <Form.Group size="lg" className="form" controlId="formBasicDoctorEmail">
                 <Form.Label>Episode ID</Form.Label>
-                <Form.Control required autoFocus type="text" value={this.state.episode}  name = "episode"   onChange={this.detailsChange}  placeholder = "Episode ID" />
+                <Form.Control required autoFocus type="text" value={this.state.episode}  name = "episode"   onChange={this.detailsChange}  placeholder = "Episode Code" />
                 <Form.Label>Episode Name</Form.Label>
                 <Form.Control required autoFocus type="text" value={this.state.episode_name}  name = "episode_name"   onChange={this.detailsChange}  placeholder = "Episode Name" />
                 <Form.Label>Diagnosis</Form.Label>
