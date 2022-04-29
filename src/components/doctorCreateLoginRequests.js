@@ -40,11 +40,12 @@ class DoctorRegistrationRequestsPage extends Component {
     }
 
     accept(doctorId){
-        const token = this.getCookie('admin_token');
+        const token = this.getCookie('admin_cookie');
+        console.log(token,doctorId);
         const headers = {
             "Authorization" : `Bearer ${token}`
         };
-        axios.post('http://localhost:8082/admin-accept-request', doctorId, { headers })
+        axios.post('http://localhost:8082/accept-login-request/'+doctorId,doctorId, { headers })
          .then(response => 
            {
 
@@ -58,11 +59,11 @@ class DoctorRegistrationRequestsPage extends Component {
         );
     }
     reject(doctorId){
-        const token = this.getCookie('admin_token');
+        const token = this.getCookie('admin_cookie');
         const headers = {
             "Authorization" : `Bearer ${token}`
         };
-        axios.post('http://localhost:8082/admin-reject-request', doctorId, { headers })
+        axios.post('http://localhost:8082/reject-login-request/'+doctorId,doctorId, { headers })
          .then(response => 
            {
 
@@ -102,6 +103,8 @@ class DoctorRegistrationRequestsPage extends Component {
         if(this.state.isAdminLoggedIn){
           if(this.state.users!==undefined){
             return (
+              <>
+              <h1>Create Login Requests</h1>
               <MDBTable striped style={{"width":"80vw","fontSize":"1.4rem"}}>
               <MDBTableHead>
                 <tr>
@@ -158,7 +161,7 @@ class DoctorRegistrationRequestsPage extends Component {
 
               </MDBTableBody>
             </MDBTable>
-    
+            </>
             )      
           }
           else{

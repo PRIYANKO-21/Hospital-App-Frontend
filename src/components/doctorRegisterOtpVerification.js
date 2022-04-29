@@ -45,7 +45,7 @@ class DoctorRegisterOtpVerificationPage extends Component {
 
       
       
-      axios.post('http://localhost:8082/validate-otp/'+this.props.match.params.doctorId+'/'+this.state.otp, {headers})
+      axios.post('http://localhost:8082/validate-otp-register/'+this.props.match.params.doctorId+'/'+this.state.otp, {headers})
       .then(response => 
         {
           if(response.status===200){
