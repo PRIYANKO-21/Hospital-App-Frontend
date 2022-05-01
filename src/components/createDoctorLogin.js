@@ -55,7 +55,10 @@ class CreateDoctorLoginPage extends Component{
             
            // xPaths = response.data.xPaths;
          }
-      ); 
+      )
+      .catch(err=>{
+          alert("Create Login failed. Please try again");
+      }); 
   }
 
   detailsChange(event){

@@ -59,7 +59,10 @@ class DelegateConsentPage extends Component{
                 alert("Error... ");
             }
          }
-      );
+      )
+      .catch(err=>{
+        alert("Error in delegation of consent");
+    }); 
   }
 
   detailsChange(event){
